@@ -48,6 +48,9 @@ class Clients implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Orders::class, mappedBy: 'Client_id', orphanRemoval: true)]
     private Collection $orders;
 
+    #[ORM\OneToOne(mappedBy: 'client_id', cascade: ['persist', 'remove'])]
+    private ?Bags $bags = null;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -189,6 +192,23 @@ class Clients implements UserInterface, PasswordAuthenticatedUserInterface
                 $order->setClientId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBags(): ?Bags
+    {
+        return $this->bags;
+    }
+
+    public function setBags(Bags $bags): static
+    {
+        // set the owning side of the relation if necessary
+        if ($bags->getClientId() !== $this) {
+            $bags->setClientId($this);
+        }
+
+        $this->bags = $bags;
 
         return $this;
     }

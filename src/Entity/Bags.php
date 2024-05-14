@@ -2,27 +2,27 @@
 
 namespace App\Entity;
 
-use App\Repository\OrdersRepository;
+use App\Repository\BagsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: OrdersRepository::class)]
-class Orders
+#[ORM\Entity(repositoryClass: BagsRepository::class)]
+class Bags
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: Products::class, inversedBy: 'orders')]
+    #[ORM\OneToOne(inversedBy: 'bags', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Clients $Client_id = null;
+    private ?Clients $client_id = null;
 
     /**
      * @var Collection<int, Products>
      */
-    #[ORM\ManyToMany(targetEntity: Products::class, inversedBy: 'orders')]
+    #[ORM\ManyToMany(targetEntity: Products::class, inversedBy: 'bags')]
     private Collection $products;
 
     public function __construct()
@@ -35,14 +35,21 @@ class Orders
         return $this->id;
     }
 
-    public function getClientId(): ?Clients
+    public function setId(int $id): static
     {
-        return $this->Client_id;
+        $this->id = $id;
+
+        return $this;
     }
 
-    public function setClientId(?Clients $Client_id): static
+    public function getClientId(): ?Clients
     {
-        $this->Client_id = $Client_id;
+        return $this->client_id;
+    }
+
+    public function setClientId(Clients $client_id): static
+    {
+        $this->client_id = $client_id;
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MaterialsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MaterialsRepository::class)]
@@ -24,6 +26,17 @@ class Materials
 
     #[ORM\Column(length: 2)]
     private ?string $Gender = null;
+
+    /**
+     * @var Collection<int, Products>
+     */
+    #[ORM\OneToMany(targetEntity: Products::class, mappedBy: 'material', orphanRemoval: true)]
+    private Collection $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +87,36 @@ class Materials
     public function setGender(string $Gender): static
     {
         $this->Gender = $Gender;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Products>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Products $product): static
+    {
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setMaterial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Products $product): static
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getMaterial() === $this) {
+                $product->setMaterial(null);
+            }
+        }
 
         return $this;
     }

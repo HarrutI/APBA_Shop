@@ -2,27 +2,26 @@
 
 namespace App\Entity;
 
-use App\Repository\OrdersRepository;
+use App\Repository\TagsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: OrdersRepository::class)]
-class Orders
+#[ORM\Entity(repositoryClass: TagsRepository::class)]
+class Tags
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: Products::class, inversedBy: 'orders')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Clients $Client_id = null;
+    #[ORM\Column(length: 30)]
+    private ?string $name = null;
 
     /**
      * @var Collection<int, Products>
      */
-    #[ORM\ManyToMany(targetEntity: Products::class, inversedBy: 'orders')]
+    #[ORM\ManyToMany(targetEntity: Products::class, mappedBy: 'tags')]
     private Collection $products;
 
     public function __construct()
@@ -35,14 +34,21 @@ class Orders
         return $this->id;
     }
 
-    public function getClientId(): ?Clients
+    public function setId(int $id): static
     {
-        return $this->Client_id;
+        $this->id = $id;
+
+        return $this;
     }
 
-    public function setClientId(?Clients $Client_id): static
+    public function getName(): ?string
     {
-        $this->Client_id = $Client_id;
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }
@@ -59,6 +65,7 @@ class Orders
     {
         if (!$this->products->contains($product)) {
             $this->products->add($product);
+            $product->addTag($this);
         }
 
         return $this;
@@ -66,7 +73,9 @@ class Orders
 
     public function removeProduct(Products $product): static
     {
-        $this->products->removeElement($product);
+        if ($this->products->removeElement($product)) {
+            $product->removeTag($this);
+        }
 
         return $this;
     }
