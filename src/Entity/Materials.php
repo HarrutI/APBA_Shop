@@ -27,6 +27,9 @@ class Materials
     #[ORM\Column(length: 2)]
     private ?string $Gender = null;
 
+    #[ORM\Column(length: 2)]
+    private ?int $Quantity = null;
+
     /**
      * @var Collection<int, Products>
      */
@@ -87,6 +90,18 @@ class Materials
     public function setGender(string $Gender): static
     {
         $this->Gender = $Gender;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?string
+    {
+        return $this->Quantity;
+    }
+
+    public function setQuantity(string $Gender): static
+    {
+        $this->Quantity = $Quantity;
 
         return $this;
     }
