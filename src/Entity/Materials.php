@@ -27,7 +27,7 @@ class Materials
     #[ORM\Column(length: 2)]
     private ?string $Gender = null;
 
-    #[ORM\Column(length: 2)]
+    #[ORM\Column]
     private ?int $Quantity = null;
 
     /**
