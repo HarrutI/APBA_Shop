@@ -18,6 +18,9 @@ class Products
     #[ORM\Column(length: 100)]
     private ?string $name = null;
 
+    #[ORM\Column]
+    private ?string $prize = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $img = null;
 
@@ -73,6 +76,19 @@ class Products
 
         return $this;
     }
+
+    public function getPrize(): ?string
+    {
+        return $this->prize;
+    }
+
+    public function setPrize(string $prize): static
+    {
+        $this->name = $prize;
+
+        return $this;
+    }
+
 
     public function getImg(): ?string
     {
