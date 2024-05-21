@@ -1,20 +1,42 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}APBA Shop{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="stylesheet" href="{{ asset('styles/header.css') }}">
 
-{% block title %}Hello ShopController!{% endblock %}
-
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/Ismael/Desktop/PROYECTO FINAL STYLENET/StyleNet/stylenet/src/Controller/ShopController.php</code></li>
-        <li>Your template at <code>C:/Users/Ismael/Desktop/PROYECTO FINAL STYLENET/StyleNet/stylenet/templates/shop/index.html.twig</code></li>
-    </ul>
-</div>
-{% endblock %}
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    {% block header %}
+        <nav>
+            <div class="nav-logo">
+                <img src="{{ asset('img/apba_logo.png') }}" alt="Logo">
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="{{ path('app_shop_home') }}">Home</a></li>
+                    <li><a href="{{ path('app_shop_search') }}">Shop</a></li>
+                    <li><a href="{{ path('app_shop_contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-icons">
+                <ul>
+                    <li><a href="{{ path('app_shop_profile') }}"><svg xmlns="http://www.w3.org/2000/svg" height="24" width="21" viewBox="0 0 448 512"><path fill="#409eef" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg></a></li>
+                    <li><a href="{{ path('app_shop_cart') }}"><svg xmlns="http://www.w3.org/2000/svg" height="24" width="27" viewBox="0 0 576 512"><path fill="#409eef" d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg></a></li>
+                </ul>
+            </div>
+        </nav>
+    {% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}
+        <div class="footer">
+                © 2024 Autoridad Portuaria de la Bahía de Algeciras
+                <a href="/aviso-legal">Aviso Legal</a>
+                <a href="/politica-de-privacidad">Política de Privacidad</a>
+                <a href="/politica-de-cookies">Política de Cookies</a>
+        </div>
+    {% endblock %}
+    </body>
+</html>

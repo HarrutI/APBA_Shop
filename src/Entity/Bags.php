@@ -17,7 +17,7 @@ class Bags
 
     #[ORM\OneToOne(inversedBy: 'bags', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Clients $client_id = null;
+    private ?Users $user_id = null;
 
     /**
      * @var Collection<int, Products>
@@ -42,14 +42,14 @@ class Bags
         return $this;
     }
 
-    public function getClientId(): ?Clients
+    public function getUserId(): ?Users
     {
-        return $this->client_id;
+        return $this->user_id;
     }
 
-    public function setClientId(Clients $client_id): static
+    public function setUserId(Users $user_id): static
     {
-        $this->client_id = $client_id;
+        $this->user_id = $user_id;
 
         return $this;
     }

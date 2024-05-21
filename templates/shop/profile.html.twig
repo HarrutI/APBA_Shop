@@ -1,0 +1,18 @@
+{% extends 'shop/index.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/profile.css') }}">
+
+{% endblock %}
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+    <div class="profile-container">
+        <h1>Perfil</h1>
+        <div class="profile-details">
+            <p><strong>Nombre:</strong> {{ user.name }}</p>
+            <p><strong>Apellidos:</strong> {{ user.surname }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Número de teléfono:</strong> {{ user.phoneNumber }}</p>
+        </div>
+    </div>
+{% endblock %}

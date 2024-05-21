@@ -17,7 +17,7 @@ class Orders
 
     #[ORM\ManyToOne(targetEntity: Products::class, inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Clients $Client_id = null;
+    private ?Users $User_id = null;
 
     /**
      * @var Collection<int, Products>
@@ -35,14 +35,14 @@ class Orders
         return $this->id;
     }
 
-    public function getClientId(): ?Clients
+    public function getUserId(): ?Users
     {
-        return $this->Client_id;
+        return $this->User_id;
     }
 
-    public function setClientId(?Clients $Client_id): static
+    public function setUserId(?Users $User_id): static
     {
-        $this->Client_id = $Client_id;
+        $this->User_id = $User_id;
 
         return $this;
     }
