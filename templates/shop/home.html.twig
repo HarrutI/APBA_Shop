@@ -37,4 +37,22 @@
             </a>
         </div>
     </div>
+
+    <div class="popular-prod">
+        <div class="title-popul-prod">Our most popular products</div>
+        <div class="products-list">
+            {% for product in products %}
+                <div class="product-display">
+                    <div class="product-content">
+                        <img src="{{ asset('img/products/' ~ product.img) }}" style="width: 150px">
+                        <div class="prod-info">
+                            <div class="product-name">{{ product.name }}</div>
+                            <div class="product-prize">{{ product.prize }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
+

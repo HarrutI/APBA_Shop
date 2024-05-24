@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Tags;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -9,10 +11,20 @@ use Symfony\Component\Routing\Attribute\Route;
 class ShopController extends AbstractController
 {
     #[Route('/home', name: '_home')]
-    public function home(): Response
+    public function home(EntityManagerInterface $entityManager): Response
     {
+
+        $tag = $entityManager->getRepository(Tags::class)->findOneBy(['name' => 'Most Popular']);
+        $products = $tag->getProducts();
+
+        $resultArray = [];
+
+        foreach ($products as $product) {
+            $resultArray[] = $product;
+        }
+
         return $this->render('shop/home.html.twig', [
-            'controller_name' => 'ShopController',
+            'products' => $resultArray,
         ]);
     }
 

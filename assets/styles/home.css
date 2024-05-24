@@ -19,7 +19,6 @@
     padding: 3vw;
     overflow-y: hidden;
     border-radius: 1vw;
-
 }
 
 .announce-text{
@@ -104,4 +103,68 @@
 
 .image-link-browser:hover .overlay-browser {
     opacity: 1;
+}
+
+.popular-prod {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 5vw;
+}
+
+/* Title Styles */
+.title-popul-prod {
+    font-size: 2vw;
+    font-weight: 700;
+    margin-bottom: 5vw;
+    text-transform: uppercase;
+}
+
+/* Product List Styles */
+.products-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2.5vw;
+}
+
+.product-display {
+    width: 20vw;
+    height: 20vw;
+    border: 1px solid #ddd;
+    padding: 1vw;
+    border-radius: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-content{
+    overflow-y: hidden;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-content img {
+    height: 10vw;
+    margin-bottom: 1vw;
+    mix-blend-mode: multiply;
+}
+
+/* Product Info Styles */
+.prod-info {
+    text-align: left;
+    margin-top: 1vw;
+}
+
+.product-name {
+    font-weight: bold;
+}
+
+.product-prize {
+    font-size: 1vw;
+    align-self: flex-end;
+    margin-top: 3vw;
 }
