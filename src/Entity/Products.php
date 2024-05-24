@@ -24,10 +24,6 @@ class Products
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $img = null;
 
-    #[ORM\ManyToOne(targetEntity: Products::class, inversedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Materials $material = null;
-
     /**
      * @var Collection<int, Tags>
      */
@@ -46,11 +42,18 @@ class Products
     #[ORM\ManyToMany(targetEntity: Bags::class, mappedBy: 'products')]
     private Collection $bags;
 
+    /**
+     * @var Collection<int, Materials>
+     */
+    #[ORM\OneToMany(targetEntity: Materials::class, mappedBy: 'product_id', orphanRemoval: true)]
+    private Collection $materials;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->bags = new ArrayCollection();
+        $this->materials = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,18 +101,6 @@ class Products
     public function setImg(?string $img): static
     {
         $this->img = $img;
-
-        return $this;
-    }
-
-    public function getMaterial(): ?Materials
-    {
-        return $this->material;
-    }
-
-    public function setMaterial(?Materials $material): static
-    {
-        $this->material = $material;
 
         return $this;
     }
@@ -187,6 +178,36 @@ class Products
     {
         if ($this->bags->removeElement($bag)) {
             $bag->removeProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Materials>
+     */
+    public function getMaterials(): Collection
+    {
+        return $this->materials;
+    }
+
+    public function addMaterial(Materials $material): static
+    {
+        if (!$this->materials->contains($material)) {
+            $this->materials->add($material);
+            $material->setProductId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaterial(Materials $material): static
+    {
+        if ($this->materials->removeElement($material)) {
+            // set the owning side to null (unless already changed)
+            if ($material->getProductId() === $this) {
+                $material->setProductId(null);
+            }
         }
 
         return $this;

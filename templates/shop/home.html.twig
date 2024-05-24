@@ -1,20 +1,40 @@
 {% extends 'shop/index.html.twig' %}
 
-{% block title %}Hello ShopController!{% endblock %}
+{% block title %}Home{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/home.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="background-portal">
+        <div class="announce-window">
+            <div class="announce-text"><strong>Discover our new collection</strong></div>
+            <a href="/shop/search"><input type="button" class="buy-now-button" value="BUY NOW"></a>
+        </div>
+    </div>
+    <div class="browser-photo-tags">
+        <div class="title-browser">Select out products</div>
+        <div class="image-browser">
+            <a href="" class="image-link-browser">
+                <div class="overlay-browser">
+                    <div class="text-over-browser">Clothes</div>
+                </div>
+                <img src="{{ asset('img/clothes_browser.png') }}" alt="Descripción de la imagen" class="img-center">
+            </a>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <a href="" class="image-link-browser">
+                <div class="overlay-browser">
+                    <div class="text-over-browser">Merchandising</div>
+                </div>
+                <img src="{{ asset('img/merchandising.png') }}" alt="Descripción de la imagen" class="img-center">
+            </a>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/Ismael/Desktop/PROYECTO FINAL STYLENET/StyleNet/stylenet/src/Controller/ShopController.php</code></li>
-        <li>Your template at <code>C:/Users/Ismael/Desktop/PROYECTO FINAL STYLENET/StyleNet/stylenet/templates/shop/index.html.twig</code></li>
-    </ul>
-</div>
+            <a href="" class="image-link-browser">
+                <div class="overlay-browser">
+                    <div class="text-over-browser">Tools</div>
+                </div>
+                <img src="{{ asset('img/tools.png') }}" alt="Descripción de la imagen" class="img-center">
+            </a>
+        </div>
+    </div>
 {% endblock %}

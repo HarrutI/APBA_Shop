@@ -30,16 +30,9 @@ class Materials
     #[ORM\Column]
     private ?int $Quantity = null;
 
-    /**
-     * @var Collection<int, Products>
-     */
-    #[ORM\OneToMany(targetEntity: Products::class, mappedBy: 'material', orphanRemoval: true)]
-    private Collection $products;
-
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'materials')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Products $product_id = null;
 
     public function getId(): ?int
     {
@@ -99,40 +92,23 @@ class Materials
         return $this->Quantity;
     }
 
-    public function setQuantity(string $Gender): static
+    public function setQuantity(string $Quantity): static
     {
         $this->Quantity = $Quantity;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Products>
-     */
-    public function getProducts(): Collection
+    public function getProductId(): ?Products
     {
-        return $this->products;
+        return $this->product_id;
     }
 
-    public function addProduct(Products $product): static
+    public function setProductId(?Products $product_id): static
     {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-            $product->setMaterial($this);
-        }
+        $this->product_id = $product_id;
 
         return $this;
     }
 
-    public function removeProduct(Products $product): static
-    {
-        if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getMaterial() === $this) {
-                $product->setMaterial(null);
-            }
-        }
-
-        return $this;
-    }
 }

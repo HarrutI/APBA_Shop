@@ -15,15 +15,14 @@ class Orders
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: Products::class, inversedBy: 'orders')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Users $User_id = null;
-
     /**
      * @var Collection<int, Products>
      */
     #[ORM\ManyToMany(targetEntity: Products::class, inversedBy: 'orders')]
     private Collection $products;
+
+    #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'orders')]
+    private ?Users $User_id = null;
 
     public function __construct()
     {
@@ -33,18 +32,6 @@ class Orders
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUserId(): ?Users
-    {
-        return $this->User_id;
-    }
-
-    public function setUserId(?Users $User_id): static
-    {
-        $this->User_id = $User_id;
-
-        return $this;
     }
 
     /**
@@ -67,6 +54,18 @@ class Orders
     public function removeProduct(Products $product): static
     {
         $this->products->removeElement($product);
+
+        return $this;
+    }
+
+    public function getUserId(): ?Users
+    {
+        return $this->User_id;
+    }
+
+    public function setUserId(?Users $User_id): static
+    {
+        $this->User_id = $User_id;
 
         return $this;
     }

@@ -1,0 +1,107 @@
+.background-portal {
+    width: 100vw;
+    height: 40vw;
+    background-image: url("../img/background_3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+}
+
+.announce-window{
+    position: absolute;
+    background-color: #91D3E3;
+    width: 40%;
+    height: 80%;
+    top: 10%;
+    right: 5%;
+    padding: 3vw;
+    overflow-y: hidden;
+    border-radius: 1vw;
+
+}
+
+.announce-text{
+    color: #013660;
+    font-size: 4vw;
+    height: 20vw;
+}
+
+.buy-now-button{
+    padding: 2vw;
+    background-color: #013660;
+    font-size: 2vw;
+    border: 5px solid transparent;
+    color: #f5f5f5;
+    font-family: 'Arials', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 1vw;
+}
+
+.buy-now-button:hover{
+    border-color: white;
+}
+
+.browser-photo-tags{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 5vw;
+}
+
+.title-browser{
+    margin-bottom: 2vw;
+    font-size: 2vw;
+    font-weight: 700;
+    font-family: 'Arial', serif;
+}
+
+.image-browser{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 3vw;
+}
+
+.image-link-browser {
+    position: relative;
+    display: inline-block;
+}
+.img-center{
+    object-fit: cover;
+    object-position: center;
+}
+
+.image-link-browser img {
+    display: block;
+    width: 25vw;
+    height: 30vw;
+}
+
+.overlay-browser {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(1, 54, 96, 0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-browser .text-over-browser {
+    color: white;
+    font-size: 3vw;
+    text-align: center;
+}
+
+.image-link-browser:hover .overlay-browser {
+    opacity: 1;
+}

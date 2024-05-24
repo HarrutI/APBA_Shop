@@ -42,14 +42,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 10)]
     private ?int $PhoneNumber = null;
 
+    #[ORM\OneToOne(mappedBy: 'user_id', cascade: ['persist', 'remove'])]
+    private ?Bags $bags = null;
+
     /**
      * @var Collection<int, Orders>
      */
-    #[ORM\OneToMany(targetEntity: Orders::class, mappedBy: 'User_id', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Orders::class, mappedBy: 'User_id')]
     private Collection $orders;
-
-    #[ORM\OneToOne(mappedBy: 'user_id', cascade: ['persist', 'remove'])]
-    private ?Bags $bags = null;
 
     public function __construct()
     {
@@ -166,35 +166,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Orders>
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Orders $order): static
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders->add($order);
-            $order->setClientId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Orders $order): static
-    {
-        if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
-            if ($order->getClientId() === $this) {
-                $order->setClientId(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getBags(): ?Bags
     {
@@ -209,6 +180,36 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->bags = $bags;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Orders>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Orders $order): static
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): static
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getUserId() === $this) {
+                $order->setUserId(null);
+            }
+        }
 
         return $this;
     }
