@@ -20,15 +20,16 @@ class Bags
     private ?Users $user_id = null;
 
     /**
-     * @var Collection<int, Products>
+     * @var Collection<int, BagProducts>
      */
-    #[ORM\ManyToMany(targetEntity: Products::class, inversedBy: 'bags')]
-    private Collection $products;
+    #[ORM\OneToMany(targetEntity: BagProducts::class, mappedBy: 'bag_id')]
+    private Collection $bagProducts;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->bagProducts = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -55,26 +56,33 @@ class Bags
     }
 
     /**
-     * @return Collection<int, Products>
+     * @return Collection<int, BagProducts>
      */
-    public function getProducts(): Collection
+    public function getBagProducts(): Collection
     {
-        return $this->products;
+        return $this->bagProducts;
     }
 
-    public function addProduct(Products $product): static
+    public function addBagProduct(BagProducts $bagProduct): static
     {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
+        if (!$this->bagProducts->contains($bagProduct)) {
+            $this->bagProducts->add($bagProduct);
+            $bagProduct->setBagId($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Products $product): static
+    public function removeBagProduct(BagProducts $bagProduct): static
     {
-        $this->products->removeElement($product);
+        if ($this->bagProducts->removeElement($bagProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($bagProduct->getBagId() === $this) {
+                $bagProduct->setBagId(null);
+            }
+        }
 
         return $this;
     }
+
 }

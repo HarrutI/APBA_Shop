@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Bags;
 use App\Entity\Products;
 use App\Entity\Tags;
 use App\Form\SearchProductType;
@@ -84,6 +85,30 @@ class ShopController extends AbstractController
         return $this->render('shop/cart.html.twig', [
             'controller_name' => 'ShopController',
         ]);
+    }
+
+    #[Route('/product_detail/{id}', name: '_product_detail')]
+    public function product_detail($id, EntityManagerInterface $entityManager): Response
+    {
+        $product = $entityManager->getRepository(Products::class)->findOneBy(['id' => $id]);
+
+        $materials = $product->getMaterials()->toArray();
+
+        return $this->render('shop/product_detail.html.twig', [
+            'product' => $product,
+            'materials' => $materials
+        ]);
+    }
+
+    #[Route('/add_cart/{id}/{quant}', name: '_add_cart')]
+    public function add_cart($id,$quant, EntityManagerInterface $entityManager): Response
+    {
+        $product = $entityManager->getRepository(Products::class)->findOneBy(['id' => $id]);
+        $bag = $entityManager->getRepository(Bags::class)->findOneBy(['user_id' => $this->getUser()]);
+
+        $bag->addProduct($product);
+
+        return $this->generateUrl('app_cart');
     }
 
 }

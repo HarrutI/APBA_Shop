@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductsRepository::class)]
@@ -31,29 +32,32 @@ class Products
     private Collection $tags;
 
     /**
-     * @var Collection<int, Orders>
-     */
-    #[ORM\ManyToMany(targetEntity: Orders::class, mappedBy: 'products')]
-    private Collection $orders;
-
-    /**
-     * @var Collection<int, Bags>
-     */
-    #[ORM\ManyToMany(targetEntity: Bags::class, mappedBy: 'products')]
-    private Collection $bags;
-
-    /**
      * @var Collection<int, Materials>
      */
     #[ORM\OneToMany(targetEntity: Materials::class, mappedBy: 'product_id', orphanRemoval: true)]
     private Collection $materials;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
+    /**
+     * @var Collection<int, BagProducts>
+     */
+    #[ORM\OneToMany(targetEntity: BagProducts::class, mappedBy: 'product_id')]
+    private Collection $bagProducts;
+
+    /**
+     * @var Collection<int, OrderProducts>
+     */
+    #[ORM\OneToMany(targetEntity: OrderProducts::class, mappedBy: 'product_id')]
+    private Collection $orderProducts;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
-        $this->orders = new ArrayCollection();
-        $this->bags = new ArrayCollection();
         $this->materials = new ArrayCollection();
+        $this->bagProducts = new ArrayCollection();
+        $this->orderProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,60 +134,6 @@ class Products
     }
 
     /**
-     * @return Collection<int, Orders>
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Orders $order): static
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders->add($order);
-            $order->addProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Orders $order): static
-    {
-        if ($this->orders->removeElement($order)) {
-            $order->removeProduct($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Bags>
-     */
-    public function getBags(): Collection
-    {
-        return $this->bags;
-    }
-
-    public function addBag(Bags $bag): static
-    {
-        if (!$this->bags->contains($bag)) {
-            $this->bags->add($bag);
-            $bag->addProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBag(Bags $bag): static
-    {
-        if ($this->bags->removeElement($bag)) {
-            $bag->removeProduct($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Materials>
      */
     public function getMaterials(): Collection
@@ -207,6 +157,78 @@ class Products
             // set the owning side to null (unless already changed)
             if ($material->getProductId() === $this) {
                 $material->setProductId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BagProducts>
+     */
+    public function getBagProducts(): Collection
+    {
+        return $this->bagProducts;
+    }
+
+    public function addBagProduct(BagProducts $bagProduct): static
+    {
+        if (!$this->bagProducts->contains($bagProduct)) {
+            $this->bagProducts->add($bagProduct);
+            $bagProduct->setProductId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBagProduct(BagProducts $bagProduct): static
+    {
+        if ($this->bagProducts->removeElement($bagProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($bagProduct->getProductId() === $this) {
+                $bagProduct->setProductId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderProducts>
+     */
+    public function getOrderProducts(): Collection
+    {
+        return $this->orderProducts;
+    }
+
+    public function addOrderProducts(OrderProducts $orderProducts): static
+    {
+        if (!$this->orderProducts->contains($orderProducts)) {
+            $this->orderProducts->add($orderProducts);
+            $orderProducts->setProductId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderProducts(OrderProducts $orderProducts): static
+    {
+        if ($this->orderProducts->removeElement($orderProducts)) {
+            // set the owning side to null (unless already changed)
+            if ($orderProducts->getProductId() === $this) {
+                $orderProducts->setProductId(null);
             }
         }
 

@@ -45,7 +45,10 @@
                 <div class="product-item">
                     <img src="{{ asset('img/products/' ~ product.img) }}">
                     <div class="product-name">{{ product.name }}</div>
-                    <div class="product-prize">{{ product.prize }}</div>
+                    <div class="product-prize">
+                        {{ product.prize }}
+                        <a href="{{ path('app_shop_product_detail', {'id': product.id}) }}"><input type="button" value="Buy"></a>
+                    </div>
                 </div>
             {% endfor %}
         </div>

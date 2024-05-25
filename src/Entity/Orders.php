@@ -24,9 +24,16 @@ class Orders
     #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'orders')]
     private ?Users $User_id = null;
 
+    /**
+     * @var Collection<int, OrderProducts>
+     */
+    #[ORM\OneToMany(targetEntity: OrderProducts::class, mappedBy: 'order_id')]
+    private Collection $orderProducts;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->orderProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -66,6 +73,36 @@ class Orders
     public function setUserId(?Users $User_id): static
     {
         $this->User_id = $User_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderProducts>
+     */
+    public function getOrderProducts(): Collection
+    {
+        return $this->orderProducts;
+    }
+
+    public function addOrderProduct(OrderProducts $orderProduct): static
+    {
+        if (!$this->orderProducts->contains($orderProduct)) {
+            $this->orderProducts->add($orderProduct);
+            $orderProduct->setOrderId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderProduct(OrderProducts $orderProduct): static
+    {
+        if ($this->orderProducts->removeElement($orderProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($orderProduct->getOrderId() === $this) {
+                $orderProduct->setOrderId(null);
+            }
+        }
 
         return $this;
     }
