@@ -29,7 +29,7 @@
                 {% endfor %}
             </ul>
             <div class="add_cart">
-                <a href=""><input type="button" value="Add to cart"></a>
+                <a href="{{ path('app_shop_add_cart', {'id': product.id, 'quant': 1}) }}"><input type="button" value="Add to cart"></a>
             </div>
         </div>
     </div>

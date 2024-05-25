@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\BagProducts;
 use App\Entity\Bags;
 use App\Entity\Products;
 use App\Entity\Tags;
+use App\Entity\Users;
 use App\Form\SearchProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -80,10 +82,38 @@ class ShopController extends AbstractController
     }
 
     #[Route('/cart', name: '_cart')]
-    public function cart(): Response
+    public function cart(EntityManagerInterface $entityManager): Response
     {
+        $user = $entityManager->getRepository(Users::class)->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $bag = $entityManager->getRepository(Bags::class)->findOneBy(['user_id' => $user->getId()]);
+
+
+        if($bag == null){
+            $newBag = new Bags();
+            $newBag->setUserId($user);
+
+            $entityManager->persist($newBag);
+            $entityManager->flush();
+
+            $bag = $entityManager->getRepository(Bags::class)->findOneBy(['user_id' => $user->getId()]);
+        }
+
+        $bagProducts = $bag->getBagProducts()->toArray();
+
+        $productList = [];
+        foreach ($bagProducts as $bagProduct) {
+            $productList[] = [
+                'product_id' => $bagProduct->getProductId()->getId(),
+                'product_name' => $bagProduct->getProductId()->getName(),
+                'product_img' => $bagProduct->getProductId()->getImg(),
+                'quantity' => $bagProduct->getQuantity()
+            ];
+        }
+
+
         return $this->render('shop/cart.html.twig', [
-            'controller_name' => 'ShopController',
+            'bag' => $bag,
+            'productList' => $productList,
         ]);
     }
 
@@ -103,12 +133,43 @@ class ShopController extends AbstractController
     #[Route('/add_cart/{id}/{quant}', name: '_add_cart')]
     public function add_cart($id,$quant, EntityManagerInterface $entityManager): Response
     {
+        $user = $entityManager->getRepository(Users::class)->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $product = $entityManager->getRepository(Products::class)->findOneBy(['id' => $id]);
-        $bag = $entityManager->getRepository(Bags::class)->findOneBy(['user_id' => $this->getUser()]);
+        $bag = $entityManager->getRepository(Bags::class)->findOneBy(['user_id' => $user->getId()]);
 
-        $bag->addProduct($product);
+        if($bag == null){
+            $newBag = new Bags();
+            $newBag->setUserId($user);
 
-        return $this->generateUrl('app_cart');
+            $entityManager->persist($newBag);
+            $entityManager->flush();
+
+            $bag = $entityManager->getRepository(Bags::class)->findOneBy(['user_id' => $user->getId()]);
+        }
+
+        $prodBag = $entityManager->getRepository(BagProducts::class)->findOneBy([
+            'bag_id' => $bag->getId(),
+            'product_id' => $product->getId()
+        ]);
+
+        dump($prodBag);
+        if($prodBag == null)
+        {
+            $bagProduct = new BagProducts();
+            $bagProduct->setProductId($product);
+            $bagProduct->setBagId($bag);
+            $bagProduct->setQuantity($quant);
+            $entityManager->persist($bagProduct);
+        }else{
+            $prodBag->setQuantity($prodBag->getQuantity()+$quant);
+            $entityManager->persist($prodBag);
+
+        }
+
+        $entityManager->flush();
+
+
+        return $this->redirectToRoute('app_shop_cart');
     }
 
 }
