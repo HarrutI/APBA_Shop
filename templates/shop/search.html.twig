@@ -1,8 +1,27 @@
 {% extends 'shop/index.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/search.css') }}">
 {% endblock %}
 {% block content %}
-    TIENDA
+    <h1>Buscar Productos</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <h2>Resultados</h2>
+    {% if products is not empty %}
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-item">
+                    <img src="{{ asset('img/products/' ~ product.img) }}" alt="{{ product.name }}"><br>
+                    <div class="product-name">{{ product.name }}</div>
+                    <div class="product-prize">{{ product.prize }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No se encontraron productos.</p>
+    {% endif %}
 {% endblock %}

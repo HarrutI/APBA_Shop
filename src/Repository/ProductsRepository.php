@@ -21,6 +21,29 @@ class ProductsRepository extends ServiceEntityRepository
         parent::__construct($registry, Products::class);
     }
 
+    /**
+     * @param string|null $query
+     * @param array $tags
+     * @return Products[]
+     */
+    public function searchByNameAndTags(?string $query, array $tags): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.tags', 't');
+
+        if ($query) {
+            $qb->andWhere('LOWER(p.name) LIKE :query')
+                ->setParameter('query', '%' . strtolower($query) . '%');
+        }
+
+        if (!empty($tags)) {
+            $qb->andWhere('t IN (:tags)')
+                ->setParameter('tags', $tags);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Products[] Returns an array of Products objects
 //     */

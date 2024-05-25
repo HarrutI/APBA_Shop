@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Products;
 use App\Entity\Tags;
+use App\Form\SearchProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 #[Route('/shop', name: 'app_shop')]
@@ -29,10 +32,31 @@ class ShopController extends AbstractController
     }
 
     #[Route('/search', name: '_search')]
-    public function search(): Response
+    public function search(Request $request, EntityManagerInterface $em): Response
     {
+        $form = $this->createForm(SearchProductType::class);
+        $form->handleRequest($request);
+
+        $productRepository = $em->getRepository(Products::class);
+        $products = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $query = $data['query'] ?? '';
+            $tags = $data['tags'] ?? [];
+
+            if ($tags instanceof \Doctrine\Common\Collections\Collection) {
+                $tags = $tags->toArray();
+            }
+
+            $products = $productRepository->searchByNameAndTags($query, $tags);
+        } else {
+            $products = $productRepository->findAll();
+        }
+
         return $this->render('shop/search.html.twig', [
-            'controller_name' => 'ShopController',
+            'form' => $form->createView(),
+            'products' => $products,
         ]);
     }
 

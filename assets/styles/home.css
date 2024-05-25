@@ -107,7 +107,7 @@
 
 .popular-prod {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     margin: 5vw;
@@ -121,7 +121,7 @@
     text-transform: uppercase;
 }
 
-/* Product List Styles */
+/* Product List Styles AQUI BORRO*/
 .products-list {
     display: flex;
     flex-wrap: wrap;
@@ -138,33 +138,4 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.product-content{
-    overflow-y: hidden;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-content img {
-    height: 10vw;
-    margin-bottom: 1vw;
-    mix-blend-mode: multiply;
-}
-
-/* Product Info Styles */
-.prod-info {
-    text-align: left;
-    margin-top: 1vw;
-}
-
-.product-name {
-    font-weight: bold;
-}
-
-.product-prize {
-    font-size: 1vw;
-    align-self: flex-end;
-    margin-top: 3vw;
 }
