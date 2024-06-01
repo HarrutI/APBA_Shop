@@ -1,21 +1,54 @@
 {% extends 'shop/index.html.twig' %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/cart.css') }}">
+    <script src="{{ asset('js/modifyQuantityCart.js') }}"></script>
 
 {% endblock %}
 {% block title %}Perfil{% endblock %}
 {% block content %}
-    <h1>Detalles del Bag</h1>
+    <div class="background-header">
+        <div class="bgh"></div>
+        <h1>Cart</h1>
+    </div>
+    <div class="cart-content">
+        <table>
+            <tr>
+                <th></th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+            {% for product in productList %}
+                <tr data-product-id="{{ product.product_id }}" data-bag-id="{{ bag.id }}">
+                    <td><img src="{{ asset('img/products/' ~ product.product_img) }}"></td>
+                    <td>{{ product.product_name }}</td>
+                    <td>{{ product.price }}€</td>
+                    <td class="quantity-td">
+                        <div class="quantity-container">
+                            <button class="decrease-btn">-</button>
+                            <span class="quantity">{{ product.quantity }}</span>
+                            <button class="increase-btn">+</button>
+                        </div>
+                    </td>
+                    <td class="subtotal">{{ product.price * product.quantity }}€</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div></div>
+        <div class="resume-cart">
+            <h1>Cart resume</h1>
+            <div class="resume-total">&nbsp;&nbsp;&nbsp;&nbsp;Subtotal: <span id="totalPrice">{{ (totalPrice * 0.79)|number_format(2, '.', '') }}€</span></div>
+            <div class="resume-total">&nbsp;&nbsp;&nbsp;&nbsp;21% IVA: <span id="totalPrice">{{ (totalPrice * 0.21)|number_format(2, '.', '') }}€</span></div>
+            <div class="resume-total"><strong>Total:</strong> <span id="totalPrice">{{ totalPrice }}€</span></div>
+            {% if productList is not empty %}
+            <div><a href="{{ path('app_shop_checkout') }}"><input type="button" value="Check out" class="redirect-button"></a></div>
+            {% endif %}
+        </div>
+    </div>
 
-    <ul>
-        {% for product in productList %}
-            <li>
-                Product ID: {{ product.product_id }}<br>
-                Product Name: {{ product.product_name }}<br>
-                Quantity: {{ product.quantity }} <br>
-                IMG: <img src="{{ asset('img/products/' ~ product.product_img) }}" style="width: 100px">
-            </li>
-        {% endfor %}
-    </ul>
+    <br>
+
 {% endblock %}
 

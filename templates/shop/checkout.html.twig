@@ -1,0 +1,34 @@
+{% extends 'shop/index.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/checkout.css') }}">
+{% endblock %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+    <div class="background-header">
+        <div class="bgh"></div>
+        <h1>Checkout</h1>
+    </div>
+    <div class="container">
+        <div>
+            {{ form_start(form, {'attr': {'class': 'billing-field'}}) }}
+            {{ form_row(form.name)  }}
+            {{ form_row(form.surname) }}
+            {{ form_row(form.phone_number) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.addressLine1) }}
+            {{ form_row(form.addressLine2) }}
+            {{ form_row(form.city) }}
+            {{ form_row(form.state) }}
+            {{ form_row(form.postalCode) }}
+            {{ form_row(form.country) }}
+            <button type="submit">Pay</button>
+            {{ form_end(form) }}
+        </div>
+        <div class="resume-cart">
+            <h1>Total price</h1>
+            <div class="resume-total">{{ totalPrice }}€</div>
+        </div>
+    </div>
+
+{% endblock %}
+

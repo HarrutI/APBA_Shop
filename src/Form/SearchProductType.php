@@ -4,7 +4,6 @@ namespace App\Form;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Tags;
@@ -24,8 +23,7 @@ class SearchProductType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false,
-            ])
-            ->add('search', SubmitType::class, ['label' => 'Buscar']);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}APBA Shop{% endblock %}</title>
-        <link rel="icon" href="">
+        <link rel="icon" href="{{ asset('img/apba_logo_clear.png') }}">
         <link rel="stylesheet" href="{{ asset('styles/header.css') }}">
 
         {% block stylesheets %}{% endblock %}
@@ -37,9 +37,9 @@
     {% block footer %}
         <div class="footer">
                 <strong>© 2024 Autoridad Portuaria de la Bahía de Algeciras</strong>
-                <a href="/aviso-legal">Aviso Legal</a>
-                <a href="/politica-de-privacidad">Política de Privacidad</a>
-                <a href="/politica-de-cookies">Política de Cookies</a>
+                <a href="/shop/legal-advice">Legal Advice</a>
+                <a href="/shop/pricacy-policy">Privacy Policies</a>
+                <a href="/shop/cookies-policy">Cookies Policies</a>
         </div>
     {% endblock %}
     </body>

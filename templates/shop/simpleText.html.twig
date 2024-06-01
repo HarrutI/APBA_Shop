@@ -1,0 +1,83 @@
+{% extends 'shop/index.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/simpleText.css') }}">
+
+{% endblock %}
+{% block title %}{{ typeText }}{% endblock %}
+{% block content %}
+
+    <div class="background-header">
+        <div class="bgh"></div>
+        <h1>APBA Shop {{ typeText }}</h1>
+    </div>
+    <div class="text-content">
+        {% if typeText == 'Legal Advice' %}
+
+
+            <p>The information provided on this website is for educational purposes only and should not be considered legal advice. This content is intended to provide general information about legal topics and is not a substitute for professional legal advice tailored to your specific situation.</p>
+            <p>While we make every effort to ensure the accuracy and reliability of the information presented, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.</p>
+
+            <p>Any reliance you place on such information is strictly at your own risk. We disclaim all liability for any loss or damage, including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.</p>
+
+            <p>The transmission and receipt of information contained on this website do not form or constitute an attorney-client relationship between you and APBA Shop or any of its representatives.</p>
+
+            <p>If you require legal advice, you should consult with a qualified attorney licensed to practice in your jurisdiction.</p>
+
+        {% elseif typeText == 'Privacy Policies' %}
+
+            <p>Welcome to APBA Shop! This Privacy Policy outlines how we collect, use, and protect the information you provide to us when you use our website.</p>
+
+            <h2>Information Collection and Use:</h2>
+
+            <p>We may collect personal information such as your name, email address, and other contact details when you voluntarily submit them through our website, such as when filling out a contact form or subscribing to our newsletter.</p>
+
+            <p>We also collect non-personal information automatically when you visit our website, such as your IP address, browser type, operating system, and pages visited. This information is used for statistical purposes and to improve the functionality and user experience of our website.</p>
+
+            <h2>Cookies:</h2>
+
+            <p>Our website may use cookies to enhance your browsing experience and to analyze how users interact with our site. Cookies are small text files stored on your computer that track your preferences and activities on our website. You can choose to accept or decline cookies through your browser settings, although this may affect certain features of our website.</p>
+
+            <h2>Data Security:</h2>
+
+            <p>We are committed to protecting the security of your personal information and have implemented appropriate technical and organizational measures to safeguard it against unauthorized access, disclosure, alteration, or destruction.</p>
+
+            <h2>Third-Party Disclosure:</h2>
+
+            <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as required by law or to comply with legal process.</p>
+
+            <h2>Changes to this Privacy Policy:</h2>
+
+            <p>We reserve the right to update or modify this Privacy Policy at any time without prior notice. Any changes will be effective immediately upon posting to this page. We encourage you to review this Privacy Policy periodically for any updates or changes.</p>
+
+        {% else %}
+            <p>This Cookies Policy explains how APBA Shop uses cookies and similar technologies on our website.</p>
+
+            <h2>What are Cookies?</h2>
+
+            <p>Cookies are small text files that are placed on your device (computer, smartphone, tablet) when you visit a website. They are widely used to make websites work more efficiently and to provide information to the owners of the site.</p>
+
+            <h2>How We Use Cookies:</h2>
+
+            <ul>
+                <li><strong>Essential Cookies:</strong> These cookies are necessary for the operation of our website and enable you to navigate and use its features, such as accessing secure areas.</li>
+                <li><strong>Analytical/Performance Cookies:</strong> These cookies allow us to recognize and count the number of visitors to our website and to see how visitors move around the site. This helps us to improve the way our website works, for example, by ensuring that users find what they are looking for easily.</li>
+                <li><strong>Functionality Cookies:</strong> These cookies are used to recognize you when you return to our website and to personalize our content for you, such as remembering your preferences.</li>
+                <li><strong>Advertising/Targeting Cookies:</strong> We do not use advertising cookies on our website.</li>
+            </ul>
+
+            <h2>Third-Party Cookies:</h2>
+
+            <p>We may also use third-party services such as Google Analytics to analyze the usage of our website. These third-party services may set their own cookies to track user interactions. We do not have control over these cookies or how the third parties use them. Please refer to the privacy policies of these third-party services for more information.</p>
+
+            <h2>Managing Cookies:</h2>
+
+            <p>You can control and manage cookies through your browser settings. Most web browsers allow you to delete cookies from your device, block all cookies, or receive a warning before a cookie is stored. Please note that blocking or deleting cookies may affect the functionality of our website.</p>
+
+            <h2>Changes to this Cookies Policy:</h2>
+
+            <p>We reserve the right to update or modify this Cookies Policy at any time without prior notice. Any changes will be effective immediately upon posting to this page. We encourage you to review this Cookies Policy periodically for any updates or changes.</p>
+        {% endif %}
+
+    </div>
+{% endblock %}
+

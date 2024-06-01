@@ -6,34 +6,31 @@
     <link rel="stylesheet" href="{{ asset('styles/home.css') }}">
 {% endblock %}
 {% block content %}
-    <div class="background-portal">
-        <div class="announce-window">
-            <div class="announce-text"><strong>Discover our new collection</strong></div>
-            <a href="{{ path('app_shop_search') }}"><input type="button" class="buy-now-button" value="BUY NOW"></a>
-        </div>
+    <div class="background-header">
+        <div class="bgh"></div>
     </div>
     <div class="browser-photo-tags">
-        <div class="title-browser">Select out products</div>
+        <div class="title-browser">Select our products</div>
         <div class="image-browser">
-            <a href="/shop/search?search_product%5Bquery%5D=&search_product%5Btags%5D%5B%5D=5&search_product%5Bsearch%5D=&search_product%5B_token%5D=dedec3389490c3eeac0d7eb614.uU1ZKl7qMCmqIjo5_HyEeodzQiZyiOnsj1fRrErziLM.zTc2GBuAcnmdaUoMvSTtHeEeIGQe45iBxgaA33_E6trYBDhga4F4WvsXDg" class="image-link-browser">
+            <a href="http://localhost:8000/shop/search?search_product%5Bquery%5D=&search_product%5Btags%5D%5B%5D=5&search_product%5B_token%5D=57d44.BAekTtovxUSX-UnyJd1C5PBOFAMOJkx1fblagMKgVN8.bl2VDbdHtQbBjy-VfIoUsqAsXWFCc34NCMM7zIz_AJBdcsIMimaCKPG-Jg" class="image-link-browser">
                 <div class="overlay-browser">
                     <div class="text-over-browser">Clothes</div>
                 </div>
-                <img src="{{ asset('img/clothes_browser.png') }}" alt="Descripción de la imagen" class="img-center">
+                <img src="{{ asset('img/clothes_browser.png') }}" class="img-center">
             </a>
 
-            <a href="/shop/search?search_product%5Bquery%5D=&search_product%5Btags%5D%5B%5D=6&search_product%5Bsearch%5D=&search_product%5B_token%5D=af3744d90f36867f5.sB5aGqjmI5qqITXEzVJosIsDdGJPpYvc-VPe8337ZpQ.xGQ1KO2MYcqdakXxjAoB1-1uFiAjzvqxsAKPgEjMBP3RVztQnY1r6fsUAQ" class="image-link-browser">
+            <a href="/shop/search?search_product%5Bquery%5D=&search_product%5Btags%5D%5B%5D=6&search_product%5B_token%5D=3d8e87bbf1ee74a6599bf9ed17414.PHSyYbwwfoJ6AukekxyqJn_IAMFB0bk56ozkgvN8QQ4.Vi6DItFYDsAsdI95ykv8cC-qSaMNhItBn_aFzr0jFUFlAdQj7Hk57hxFhg" class="image-link-browser">
                 <div class="overlay-browser">
                     <div class="text-over-browser">Merchandising</div>
                 </div>
-                <img src="{{ asset('img/merchandising.png') }}" alt="Descripción de la imagen" class="img-center">
+                <img src="{{ asset('img/merchandising.png') }}" class="img-center">
             </a>
 
-            <a href="/shop/search?search_product%5Bquery%5D=&search_product%5Btags%5D%5B%5D=7&search_product%5Bsearch%5D=&search_product%5B_token%5D=c6e85138f7986d4630732ce090aa8038.f3Bu9WkOpELw7vgrECyaLf9E8oebm3pIdGQB7kSqK5s.CwoBxyxk5hLHpYgeUXTzSpkpkMX38AslPTVQnXGdSfIeOQ-_XGXsMaHbzA" class="image-link-browser">
+            <a href="http://localhost:8000/shop/search?search_product%5Bquery%5D=&search_product%5Btags%5D%5B%5D=7&search_product%5B_token%5D=99c990132b8145d808c83af8a7.eVGwlLwJgnw-EuIeIXxVoiQr5wcn686DCuqc86mRi2o.EwuB19Fh8j5oZIR5eCsD9HRJrmVrvvz7f5D9v-fO3yUgJNbW7EDFEFhVjQ" class="image-link-browser">
                 <div class="overlay-browser">
                     <div class="text-over-browser">Tools</div>
                 </div>
-                <img src="{{ asset('img/tools.png') }}" alt="Descripción de la imagen" class="img-center">
+                <img src="{{ asset('img/tools.png') }}" class="img-center">
             </a>
         </div>
     </div>
@@ -43,11 +40,13 @@
         <div class="product-grid">
             {% for product in products %}
                 <div class="product-item">
-                    <img src="{{ asset('img/products/' ~ product.img) }}">
+                    <div class="product-item-img">
+                        <img src="{{ asset('img/products/' ~ product.img) }}" alt="{{ product.name }}">
+                    </div>
                     <div class="product-name">{{ product.name }}</div>
                     <div class="product-prize">
-                        {{ product.prize }}
-                        <a href="{{ path('app_shop_product_detail', {'id': product.id}) }}"><input type="button" value="Buy"></a>
+                        {{ product.prize }}€
+                        <a href="{{ path('app_shop_product_detail', {'id': product.id}) }}"><input type="button" value="Buy" class="redirect-button"></a>
                     </div>
                 </div>
             {% endfor %}

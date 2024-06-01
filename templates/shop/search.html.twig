@@ -2,29 +2,63 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('styles/search.css') }}">
+    <script src="{{ asset('js/search_filter.js') }}"></script>
 {% endblock %}
 {% block content %}
-    <h1>Buscar Productos</h1>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
+    <div class="background-header">
+        <div class="bgh"></div>
+        <h1>Shop</h1>
+    </div>
+
+        {{ form_start(form) }}
+
+    <div class="search-query">
+        <div class="form-group">
+            <label for="search_product_query">Search</label>
+            {{ form_widget(form.query, {'attr': {'class': 'form-control'}}) }}
+            <button type="submit" class="btn btn-primary" aria-label="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.397h-.001l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85zm-5.69 1.397a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/>
+                </svg>
+            </button>
+            <button type="button" class="btn btn-secondary" aria-label="Filters" onclick="toggleFilters()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                    <path d="M1.5 1.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.146.354L10 6.207V12.5a.5.5 0 0 1-.262.434l-3 1.5A.5.5 0 0 1 6 14.5v-8.293L1.646 2.854A.5.5 0 0 1 1.5 2.5v-1z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div id="filters-container" class="filters-container">
+        <div class="filter-info">
+            {{ form_widget(form.tags) }}
+        </div>
+    </div>
+
     {{ form_end(form) }}
 
-    <h2>Resultados</h2>
-    {% if products is not empty %}
-        <div class="product-grid">
-            {% for product in products %}
-                <div class="product-item">
-                    <img src="{{ asset('img/products/' ~ product.img) }}" alt="{{ product.name }}"><br>
-                    <div class="product-name">{{ product.name }}</div>
-                    <div class="product-prize">
-                        {{ product.prize }}
-                        <a href="{{ path('app_shop_product_detail', {'id': product.id}) }}"><input type="button" value="Buy"></a>
+    <div class="display_result">
+        <h2>Resultados</h2>
+        {% if products is not empty %}
+            <div class="product-grid">
+                {% for product in products %}
+                    <div class="product-item">
+                        <div class="product-item-img">
+                            <img src="{{ asset('img/products/' ~ product.img) }}" alt="{{ product.name }}">
+                        </div>
+                        <div class="product-name">{{ product.name }}</div>
+                        <div class="product-prize">
+                            {{ product.prize }}€
+                            <a href="{{ path('app_shop_product_detail', {'id': product.id}) }}"><input type="button" value="Buy" class="redirect-button"></a>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>No se encontraron productos.</p>
-    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Products not found</p>
+        {% endif %}
+    </div>
+
+
+
 {% endblock %}

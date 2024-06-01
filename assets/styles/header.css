@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     overflow-x: hidden;
+    user-select: none;
 }
 
 body {
@@ -10,6 +11,10 @@ body {
     background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
+}
+
+img{
+    mix-blend-mode: multiply;
 }
 
 nav {
@@ -61,7 +66,7 @@ nav {
 }
 
 .content{
-    min-height: 85.9vh;
+    min-height: 85vh;
     flex: 1;
     margin-bottom: 5vw;
 }
@@ -152,11 +157,17 @@ nav {
     align-items: center;
 }
 
+.product-item-img{
+    height: 16vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .product-item img {
     max-width: 100%;
-    height: auto;
+    max-height: 14vw;
     margin-bottom: 1vw;
-    mix-blend-mode: multiply;
 }
 
 .product-name {
@@ -170,4 +181,66 @@ nav {
     font-size: 1.3vw;
     align-self: flex-start;
     height: 3vw;
+}
+
+.background-header {
+    width: 100vw;
+    height: 15vw;
+    background-image: url("../img/img_3.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5vw;
+}
+
+.bgh{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(1, 54, 96, 0.5);
+
+}
+
+.background-header h1{
+    z-index: 1;
+    font-size: 7vw;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+
+}
+
+.redirect-button{
+    background-color: #013660;
+    border: 5px solid transparent;
+    color: #f5f5f5;
+    font-family: 'Arials', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.3vw 0.6vw;
+    font-size: 0.8vw;
+    border-radius: 0.3vw;
+    margin-left: 1vw;
+}
+
+.redirect-button:hover{
+    background-color: #02A8DA;
+}
+
+th, td{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+td{
+    height: 10vw;
 }

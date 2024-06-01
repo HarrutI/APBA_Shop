@@ -1,0 +1,33 @@
+{% extends 'shop/index.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/orders.css') }}">
+
+{% endblock %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+    <div class="background-header">
+        <h1>My orders</h1>
+    </div>
+    <div class="order_list">
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Total price</th>
+                <th></th>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.date }}</td>
+                    <td>{{ order.price }}</td>
+                    <td class="subtotal">
+                        <a href="{{ path('app_shop_order_details', {'order_id': order.id}) }}">
+                            <input type="button" value="Check order" class="redirect-button">
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}

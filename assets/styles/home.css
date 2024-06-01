@@ -6,12 +6,11 @@
     background-size: cover;
     background-position: center;
     position: relative;
-
 }
 
 .announce-window{
     position: absolute;
-    background-color: #91D3E3;
+    background-color: rgba(145, 211, 227, 1);
     width: 40%;
     height: 80%;
     top: 10%;
@@ -27,20 +26,16 @@
     height: 20vw;
 }
 
-.buy-now-button{
+.big-button{
     padding: 2vw;
-    background-color: #013660;
     font-size: 2vw;
-    border: 5px solid transparent;
-    color: #f5f5f5;
-    font-family: 'Arials', sans-serif;
-    font-weight: bold;
-    cursor: pointer;
     border-radius: 1vw;
 }
 
-.buy-now-button:hover{
+
+.big-button:hover{
     border-color: white;
+    background-color: #013660;
 }
 
 .browser-photo-tags{
@@ -63,12 +58,13 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    gap: 3vw;
+    gap: 4vw;
 }
 
 .image-link-browser {
     position: relative;
     display: inline-block;
+    border-radius: 1vw;
 }
 .img-center{
     object-fit: cover;
@@ -79,6 +75,7 @@
     display: block;
     width: 25vw;
     height: 30vw;
+    mix-blend-mode: normal;
 }
 
 .overlay-browser {
@@ -110,7 +107,7 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    margin: 5vw;
+    margin: 2vw;
 }
 
 /* Title Styles */

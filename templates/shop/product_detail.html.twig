@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ asset('styles/product_detail.css') }}">
 
 {% endblock %}
-{% block title %}Perfil{% endblock %}
+{% block title %}Product details{% endblock %}
 {% block content %}
     <div class="product-detail">
         <div class="product-image">
@@ -21,15 +21,13 @@
             <ul>
                 {% for material in materials %}
                     <li>
-                        <strong>Tamaño:</strong> {{ material.size }}
+                        <strong>Size:</strong> {{ material.size }}
                         <strong>Color:</strong> {{ material.color }}
-                        <strong>Género:</strong> {{ material.gender }}
-                        <strong>Cantidad:</strong> {{ material.quantity }}
                     </li>
                 {% endfor %}
             </ul>
             <div class="add_cart">
-                <a href="{{ path('app_shop_add_cart', {'id': product.id, 'quant': 1}) }}"><input type="button" value="Add to cart"></a>
+                <a href="{{ path('app_shop_add_cart', {'id': product.id, 'quant': 1}) }}"><input type="button" value="Add to cart" class="redirect-button"></a>
             </div>
         </div>
     </div>

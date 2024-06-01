@@ -1,0 +1,45 @@
+{% extends 'shop/index.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/cart.css') }}">
+
+{% endblock %}
+{% block title %}Order details{% endblock %}
+{% block content %}
+    <div class="background-header">
+        <div class="bgh"></div>
+        <h1>Order detail</h1>
+    </div>
+    <div class="cart-content">
+        <table>
+            <tr>
+                <th></th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+
+                <th></th>
+            </tr>
+            {% for product in products %}
+                <tr>
+                    <td><img src="{{ asset('img/products/' ~ product.product_img) }}" style="width: 100px"></td>
+                    <td>{{ product.product_name }}</td>
+                    <td>{{ product.price }}€</td>
+                    <td>{{ product.quantity }}</td>
+                    <td class="subtotal">{{ product.price * product.quantity }}€</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div></div>
+        <div class="resume-cart">
+            <h1>Cart resume</h1>
+            <div class="resume-total">&nbsp;&nbsp;&nbsp;&nbsp;Subtotal: <span id="totalPrice">{{ (totalPrice * 0.79)|number_format(2, '.', '') }}€</span></div>
+            <div class="resume-total">&nbsp;&nbsp;&nbsp;&nbsp;21% IVA: <span id="totalPrice">{{ (totalPrice * 0.21)|number_format(2, '.', '') }}€</span></div>
+            <div class="resume-total"><strong>Total:</strong> <span id="totalPrice">{{ totalPrice }}€</span></div>
+        </div>
+    </div>
+
+    <br>
+
+{% endblock %}
+

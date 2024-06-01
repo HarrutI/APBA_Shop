@@ -1,0 +1,20 @@
+.text-content {
+    line-height: 1.6;
+    margin: 3vw;
+}
+
+h2 {
+    color: #333;
+}
+
+.text-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
+
+}
+
+.text-content p {
+    margin-bottom: 20px;
+
+}

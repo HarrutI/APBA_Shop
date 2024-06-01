@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\OrdersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrdersRepository::class)]
@@ -29,6 +30,12 @@ class Orders
      */
     #[ORM\OneToMany(targetEntity: OrderProducts::class, mappedBy: 'order_id')]
     private Collection $orderProducts;
+
+    #[ORM\OneToOne(mappedBy: 'order_id', cascade: ['persist', 'remove'])]
+    private ?BillingDetails $billingDetails = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
 
     public function __construct()
     {
@@ -103,6 +110,35 @@ class Orders
                 $orderProduct->setOrderId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBillingDetails(): ?BillingDetails
+    {
+        return $this->billingDetails;
+    }
+
+    public function setBillingDetails(BillingDetails $billingDetails): static
+    {
+        // set the owning side of the relation if necessary
+        if ($billingDetails->getOrderId() !== $this) {
+            $billingDetails->setOrderId($this);
+        }
+
+        $this->billingDetails = $billingDetails;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }

@@ -8,7 +8,6 @@
 
 .product-image {
     margin:  3vw 7vw 2vw 10vw;
-    border: #0056b3 solid 0.5vw;
     border-radius: 1.3vw;
     height: 35vw;
     width: 40vw;
@@ -24,12 +23,16 @@
 }
 
 .product-info {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     margin:  3vw 3vw 2vw 0;
-    background-color: #93c5fd;
-    border: 1px solid transparent;
-    border-radius: 1.3vw;
     padding: 0.5vw;
+    height: 30vw;
+    position: relative;
+    background-color: #f9f9f9;
+    border-radius: 1vw;
+    border: 1px solid #ddd;
 }
 
 #product_prize{
@@ -45,7 +48,7 @@
 }
 
 #product_description{
-
+margin-bottom: 1vw;
 }
 
 .product-info ul {
@@ -57,16 +60,7 @@
     margin-bottom: 10px;
 }
 
-.product-info a {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.product-info a:hover {
-    background-color: #0056b3;
+.add_cart{
+    position: absolute;
+    bottom: 1vw;
 }

@@ -1,0 +1,19 @@
+table{
+    margin: 5vw;
+    padding: 2vw;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 1vw;
+}
+
+td{
+    height: 5vw;
+    width: 10vw;
+}
+
+.order_list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

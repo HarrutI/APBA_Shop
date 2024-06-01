@@ -3,15 +3,23 @@
     <link rel="stylesheet" href="{{ asset('styles/profile.css') }}">
 
 {% endblock %}
-{% block title %}Perfil{% endblock %}
+{% block title %}Profile{% endblock %}
 {% block content %}
     <div class="profile-container">
-        <h1>Perfil</h1>
+        <h1>Profile</h1>
         <div class="profile-details">
-            <p><strong>Nombre:</strong> {{ user.name }}</p>
-            <p><strong>Apellidos:</strong> {{ user.surname }}</p>
+            <p><strong>Name:</strong> {{ user.name }}</p>
+            <p><strong>Surname:</strong> {{ user.surname }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Número de teléfono:</strong> {{ user.phoneNumber }}</p>
+            <p><strong>Phone number:</strong> {{ user.phoneNumber }}</p>
+        </div>
+        <div>
+            <a href="{{ path('app_shop_orders')}}"><input type="button" value="My Orders" class="orders-btn"></a>
+        </div>
+        <div>
+            <a href="{{ path('app_logout') }}"><input type="button" value="Log out" class="log-out-btn"></a>
         </div>
     </div>
+
+
 {% endblock %}
