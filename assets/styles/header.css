@@ -211,10 +211,12 @@ th, td {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    font-size: 1.5vw;
 }
 
 td {
     height: 10vw;
+
 }
 
 @media (max-width: 768px) {
@@ -285,7 +287,8 @@ td {
         border-radius: 1vw;
     }
 
-    td {
+    th, td {
         height: auto;
+        font-size: 3vw;
     }
 }
