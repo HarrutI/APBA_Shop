@@ -1,6 +1,6 @@
 .container{
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 40% 60%;
     place-items: center;
     padding: 3vw;
 }
@@ -75,4 +75,25 @@ button[type="submit"]:hover {
     align-self: flex-start;
     font-size: 1.5vw;
     color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 5vw;
+        grid-template-columns: 100%;
+        gap: 5vw;
+    }
+
+    form {
+        width: 80vw;
+    }
+
+    .resume-cart {
+        height: 15vw;
+        width: 80vw;
+    }
+
+    .resume-total{
+        font-size: 3vw;
+    }
 }

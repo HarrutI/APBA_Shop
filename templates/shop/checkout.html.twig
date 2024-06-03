@@ -9,6 +9,11 @@
         <h1>Checkout</h1>
     </div>
     <div class="container">
+
+        <div class="resume-cart">
+            <h1>Total price</h1>
+            <div class="resume-total">{{ totalPrice }}€</div>
+        </div>
         <div>
             {{ form_start(form, {'attr': {'class': 'billing-field'}}) }}
             {{ form_row(form.name)  }}
@@ -23,10 +28,6 @@
             {{ form_row(form.country) }}
             <button type="submit">Pay</button>
             {{ form_end(form) }}
-        </div>
-        <div class="resume-cart">
-            <h1>Total price</h1>
-            <div class="resume-total">{{ totalPrice }}€</div>
         </div>
     </div>
 

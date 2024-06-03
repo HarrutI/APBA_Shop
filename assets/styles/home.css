@@ -8,7 +8,7 @@
     position: relative;
 }
 
-.announce-window{
+.announce-window {
     position: absolute;
     background-color: rgba(145, 211, 227, 1);
     width: 40%;
@@ -20,25 +20,13 @@
     border-radius: 1vw;
 }
 
-.announce-text{
+.announce-text {
     color: #013660;
     font-size: 4vw;
     height: 20vw;
 }
 
-.big-button{
-    padding: 2vw;
-    font-size: 2vw;
-    border-radius: 1vw;
-}
-
-
-.big-button:hover{
-    border-color: white;
-    background-color: #013660;
-}
-
-.browser-photo-tags{
+.browser-photo-tags {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,14 +34,14 @@
     margin: 5vw;
 }
 
-.title-browser{
+.title-browser {
     margin-bottom: 2vw;
     font-size: 2vw;
     font-weight: 700;
     font-family: 'Arial', serif;
 }
 
-.image-browser{
+.image-browser {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +54,8 @@
     display: inline-block;
     border-radius: 1vw;
 }
-.img-center{
+
+.img-center {
     object-fit: cover;
     object-position: center;
 }
@@ -118,7 +107,6 @@
     text-transform: uppercase;
 }
 
-/* Product List Styles AQUI BORRO*/
 .products-list {
     display: flex;
     flex-wrap: wrap;
@@ -135,4 +123,127 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .background-portal {
+        height: 50vw;
+    }
+
+    .announce-window {
+        width: 90%;
+        height: auto;
+        top: 5%;
+        right: 5%;
+        padding: 5vw;
+    }
+
+    .announce-text {
+        font-size: 6vw;
+        height: auto;
+    }
+
+
+    .browser-photo-tags {
+        margin: 10vw 2vw;
+    }
+
+    .title-browser {
+        font-size: 4vw;
+    }
+
+    .image-browser {
+        flex-direction: column;
+        gap: 8vw;
+    }
+
+    .image-link-browser img {
+        width: 80vw;
+        height: auto;
+    }
+
+    .overlay-browser{
+        opacity: 1;
+    }
+
+    .overlay-browser .text-over-browser {
+        font-size: 6vw;
+    }
+
+    .popular-prod {
+        margin: 5vw 2vw;
+    }
+
+    .title-popul-prod {
+        font-size: 4vw;
+        margin-bottom: 10vw;
+    }
+
+    .products-list {
+        gap: 5vw;
+    }
+
+    .product-display {
+        width: 40vw;
+        height: auto;
+        padding: 2vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .background-portal {
+        height: 60vw;
+    }
+
+    .announce-window {
+        width: 100%;
+        height: auto;
+        top: 5%;
+        right: 0;
+        padding: 6vw;
+    }
+
+    .announce-text {
+        font-size: 8vw;
+    }
+
+    .browser-photo-tags {
+        margin: 15vw 3vw;
+    }
+
+    .title-browser {
+        font-size: 5vw;
+    }
+
+    .image-browser {
+        flex-direction: column;
+        gap: 10vw;
+    }
+
+    .image-link-browser img {
+        width: 90vw;
+    }
+
+    .overlay-browser .text-over-browser {
+        font-size: 8vw;
+    }
+
+    .popular-prod {
+        margin: 7vw 3vw;
+    }
+
+    .title-popul-prod {
+        font-size: 5vw;
+        margin-bottom: 12vw;
+    }
+
+    .products-list {
+        gap: 6vw;
+    }
+
+    .product-display {
+        width: 45vw;
+        padding: 3vw;
+    }
 }

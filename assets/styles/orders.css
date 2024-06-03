@@ -17,3 +17,14 @@ td{
     align-items: center;
 
 }
+
+@media (max-width: 768px) {
+    .order_list {
+        width: 100vw;
+    }
+
+    table{
+        width: 85vw;
+    }
+
+}

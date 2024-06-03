@@ -4,17 +4,17 @@
     padding: 5vw;
 }
 
-img{
+img {
     width: 100px;
 }
 
-.quantity-td{
+.quantity-td {
     display: flex;
 }
 
-.resume-cart{
+.resume-cart {
     background-color: #93c5fd;
-    height: 15vw;
+    height: 20vw;
     border-radius: 1vw;
     display: flex;
     flex-direction: column;
@@ -23,8 +23,14 @@ img{
     padding: 2vw;
 }
 
-.resume-total{
+.resume-cart h1{
+    font-size: 3vw;
+}
+
+.resume-total {
     align-self: flex-start;
+    height: 2vw;
+    font-size: 1.3vw;
 }
 
 .quantity-container {
@@ -44,12 +50,46 @@ img{
 }
 
 .quantity-container button:hover {
-    background-color: #91D3E3; /* Cambia el color de fondo al pasar el ratón */
+    background-color: #91D3E3;
 }
 
 .quantity-container .quantity {
     padding: 0 10px;
-    font-size: 16px; /* Tamaño de fuente */
+    font-size: 16px;
 }
 
+@media (max-width: 768px) {
+    .cart-content {
+        grid-template-columns: 1fr;
+        padding: 3vw;
+    }
 
+    .resume-cart {
+        height: auto;
+        padding: 3vw;
+        width: 100%;
+        margin-top: 3vw;
+    }
+
+    .resume-cart h1{
+        font-size: 5vw;
+    }
+
+    .resume-total {
+        align-self: flex-start;
+        height: 3vw;
+        font-size: 2.5vw;
+    }
+
+    .quantity-container {
+        width: 100%;
+    }
+
+    img {
+        width: 80px;
+    }
+
+    .quantity-container .quantity {
+        font-size: 14px;
+    }
+}

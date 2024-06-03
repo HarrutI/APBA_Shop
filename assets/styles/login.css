@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Roboto Slab,sans-serif;
+    font-family: Roboto Slab, sans-serif;
     user-select: none;
 }
 
@@ -91,3 +91,4 @@ button[type="button"] {
 button[type="button"]:hover {
     background-color: #5a6268;
 }
+
