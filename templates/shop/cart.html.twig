@@ -39,8 +39,8 @@
         <div></div>
         <div class="resume-cart">
             <h1>Cart resume</h1>
-            <div class="resume-total">&nbsp;&nbsp;&nbsp;&nbsp;Subtotal: <span id="totalPrice">{{ (totalPrice * 0.79)|number_format(2, '.', '') }}€</span></div>
-            <div class="resume-total">&nbsp;&nbsp;&nbsp;&nbsp;21% IVA: <span id="totalPrice">{{ (totalPrice * 0.21)|number_format(2, '.', '') }}€</span></div>
+            <div class="resume-total">&nbsp;&nbsp;&nbsp;&nbsp;Subtotal: <span id="subtotalPrice">{{ (totalPrice * 0.79)|number_format(2, '.', '') }}€</span></div>
+            <div class="resume-total">&nbsp;&nbsp;&nbsp;&nbsp;21% IVA: <span id="ivaPrice">{{ (totalPrice * 0.21)|number_format(2, '.', '') }}€</span></div>
             <div class="resume-total"><strong>Total:</strong> <span id="totalPrice">{{ totalPrice }}€</span></div>
             {% if productList is not empty %}
             <div><a href="{{ path('app_shop_checkout') }}"><input type="button" value="Check out" class="redirect-button"></a></div>

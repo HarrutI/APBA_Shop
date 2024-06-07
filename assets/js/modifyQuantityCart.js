@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
             row.querySelector('.subtotal').textContent = `${data.subtotal.toFixed(2)}€`;
 
             document.getElementById('totalPrice').textContent = `${data.totalPrice.toFixed(2)}€`;
+            document.getElementById('subtotalPrice').textContent = `${(data.totalPrice * 0.79).toFixed(2)}€`;
+            document.getElementById('ivaPrice').textContent = `${(data.totalPrice * 0.21).toFixed(2)}€`;
         } else {
             console.error('Error updating quantity:', data.message);
         }
@@ -51,6 +53,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const row = document.querySelector(`tr[data-product-id="${productId}"]`);
                 row.remove();
                 document.getElementById('totalPrice').textContent = `${data.totalPrice.toFixed(2)}€`;
+                document.getElementById('subtotalPrice').textContent = `${(data.totalPrice * 0.79).toFixed(2)}€`;
+                document.getElementById('ivaPrice').textContent = `${(data.totalPrice * 0.21).toFixed(2)}€`;
+                
+
             } else {
                 console.error('Error removing product:', data.message);
             }

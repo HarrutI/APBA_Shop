@@ -6,6 +6,7 @@
 {% block title %}Orders{% endblock %}
 {% block content %}
     <div class="background-header">
+        <div class="bgh"></div>
         <h1>My orders</h1>
     </div>
     <div class="order_list">
@@ -18,7 +19,7 @@
             {% for order in orders %}
                 <tr>
                     <td>{{ order.date }}</td>
-                    <td>{{ order.price }}</td>
+                    <td>{{ order.price }}€</td>
                     <td class="subtotal">
                         <a href="{{ path('app_shop_order_details', {'order_id': order.id}) }}">
                             <input type="button" value="Check order" class="redirect-button">
