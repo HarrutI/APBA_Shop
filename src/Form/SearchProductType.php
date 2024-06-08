@@ -12,7 +12,7 @@ class SearchProductType extends AbstractType
 {
     // This function is used to build the form for the SearchProductType form.
 
-    public function buildForm(FormBuilderInterface $builder)
+    public function buildForm(FormBuilderInterface $builder,array $options)
     {
         $builder
             // Add the 'query' field to the form
