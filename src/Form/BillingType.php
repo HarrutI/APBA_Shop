@@ -10,6 +10,11 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class BillingType extends AbstractType
 {
+    /*
+      Builds the form for the BillingDetails entity.
+      
+      This form contains fields for the billing details of an order.
+    */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

@@ -10,19 +10,23 @@ use App\Entity\Tags;
 
 class SearchProductType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    // This function is used to build the form for the SearchProductType form.
+
+    public function buildForm(FormBuilderInterface $builder)
     {
         $builder
+            // Add the 'query' field to the form
             ->add('query', SearchType::class, [
-                'label' => 'Buscar productos',
-                'required' => false,
+                'label' => 'Buscar productos', // Label for the field
+                'required' => false // Field is not required
             ])
+            // Add the 'tags' field to the form
             ->add('tags', EntityType::class, [
-                'class' => Tags::class,
-                'choice_label' => 'name',
-                'multiple' => true,
-                'expanded' => true,
-                'required' => false,
+                'class' => Tags::class, // Entity class for the select field
+                'choice_label' => 'name', // Field of the entity that will be used as the label for each option
+                'multiple' => true, // Allow multiple selections
+                'expanded' => true, // Display as a list of checkboxes
+                'required' => false // Field is not required
             ]);
     }
 
