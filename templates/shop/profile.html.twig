@@ -5,8 +5,12 @@
 {% endblock %}
 {% block title %}Profile{% endblock %}
 {% block content %}
-    <div class="profile-container">
+
+    <div class="background-header">
+        <div class="bgh"></div>
         <h1>Profile</h1>
+    </div>
+    <div class="profile-container">
         <div class="profile-details">
             <p><strong>Name:</strong> {{ user.name }}</p>
             <p><strong>Surname:</strong> {{ user.surname }}</p>
