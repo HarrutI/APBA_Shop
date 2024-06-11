@@ -113,4 +113,72 @@ Representa los usuarios registrados en el sistema. Contiene información sobre c
   pago. Procesa los detalles de facturación y crea un nuevo pedido en la base de datos, moviendo los productos del carrito al pedido y ajustando las
   cantidades de stock de los productos. Finalmente, redirige al usuario a la página de detalles del pedido.
 - **app_shop_order_details**: Muestra los detalles de un pedido específico. Consulta la base de datos para obtener la información de un pedido específico,
--  incluyendo los productos pedidos, sus cantidades y detalles de facturación. Esta información se envía a la plantilla orderDetails.html.twig para su visualización.
+   incluyendo los productos pedidos, sus cantidades y detalles de facturación. Esta información se envía a la plantilla orderDetails.html.twig para su visualización.
+
+### Rutas POST
+- **remove_from_cart**: Esta ruta permite al usuario eliminar un producto específico de su carrito de compras. Recibe el ID del carrito y el ID del producto
+   como parámetros. Una vez recibida la solicitud, el controlador elimina el producto correspondiente del carrito y actualiza la base de datos para reflejar el
+   cambio. Después, redirige al usuario de vuelta al carrito para mostrar el estado actualizado.
+- **update_quantity**: Esta ruta permite al usuario actualizar la cantidad de un producto específico en su carrito de compras. Recibe el ID del carrito y el ID
+  del producto como parámetros, así como la nueva cantidad deseada a través del cuerpo de la solicitud. El controlador valida y aplica la actualización en la base
+  de datos y redirige al usuario de vuelta al carrito para mostrar el estado actualizado del mismo.
+
+## Formularios
+
+### BillingType
+La clase BillingType es responsable de construir el formulario para la entidad BillingDetails, que contiene los detalles de facturación de un pedido. Este formulario
+incluye varios campos que son esenciales para recopilar información de facturación del usuario.
+
+- **buildForm**: Este método construye el formulario agregando diferentes campos, cada uno representando un aspecto de los detalles de facturación.
+  - name: Un campo de texto para ingresar el nombre del usuario.
+  - surname: Un campo de texto para ingresar el apellido del usuario.
+  - phone_number: Un campo de texto para ingresar el número de teléfono del usuario.
+  - email: Un campo de tipo email para ingresar la dirección de correo electrónico del usuario.
+  - addressLine1: Un campo de texto para ingresar la primera línea de la dirección del usuario.
+  - addressLine2: Un campo de texto opcional para ingresar la segunda línea de la dirección del usuario.
+  - city: Un campo de texto para ingresar la ciudad del usuario.
+  - state: Un campo de texto para ingresar el estado o provincia del usuario.
+  - postalCode: Un campo de texto para ingresar el código postal del usuario.
+  - country: Un campo de texto para ingresar el país del usuario.
+- **configureOptions**: Este método configura las opciones del formulario, especificando que los datos manejados por el formulario corresponden a la clase BillingDetails.
+
+### SearchProductType
+La clase SearchProductType es responsable de construir el formulario utilizado para buscar productos. Este formulario permite a los usuarios ingresar criterios de 
+búsqueda y seleccionar etiquetas asociadas a los productos.
+
+- **buildForm**: Este método construye el formulario agregando diferentes campos, cada uno representando un criterio de búsqueda.
+  - query: Un campo de tipo búsqueda que permite a los usuarios ingresar términos de búsqueda. Tiene una etiqueta personalizada "Buscar productos" y no es obligatorio.
+  - tags: Un campo de tipo entidad que permite seleccionar múltiples etiquetas asociadas a los productos. Este campo se relaciona con la entidad Tags, utilizando el campo
+    name de la entidad como etiqueta para cada opción. Las opciones se presentan como una lista de casillas de verificación y el campo no es obligatorio.
+- **configureOptions**: Este método configura las opciones del formulario, especificando que el método de envío del formulario es GET.
+
+## Templates
+
+### Carpeta Security
+- **login.html.twig**: Esta plantilla se utiliza para mostrar el formulario de inicio de sesión. Contiene campos para ingresar el correo electrónico y la contraseña, así
+ como una opción para recordar el correo electrónico y un botón para enviar el formulario.
+
+### Carpeta Shop
+- **cart.html.twig**: Esta plantilla muestra los productos que el usuario ha agregado al carrito de compras. Muestra una tabla con detalles de cada producto, incluyendo
+  imagen, nombre, precio, cantidad y subtotal. También muestra el total de la compra y proporciona un botón para proceder al pago.
+- **checkout.html.twig**: Esta plantilla se utiliza para el proceso de pago. Muestra un resumen del precio total de la compra y un formulario para que el usuario ingrese
+   su información de facturación, como nombre, apellido, número de teléfono, dirección, etc.
+- **contact.html.twig**: Esta plantilla muestra un formulario de contacto donde los usuarios pueden enviar preguntas o comentarios. Contiene campos para ingresar el nombre,
+   correo electrónico y mensaje del usuario, así como un botón para enviar el formulario.
+- **home.html.twig**: Esta plantilla representa la página de inicio de la tienda. Muestra una selección de productos destacados y proporciona enlaces para que los usuarios
+  naveguen por diferentes categorías de productos.
+- **index.html.twig**: Esta plantilla es la estructura base de todas las páginas del sitio. Define la estructura básica del HTML, incluyendo la cabecera, el contenido principal
+  y el pie de página. También carga los estilos CSS y otros recursos necesarios.
+- **order_details.html.twig**: Esta plantilla muestra los detalles de un pedido específico. Muestra información detallada sobre los productos incluidos en el pedido, así como
+   el precio total y la información de envío.
+- **orders.html.twig**: Esta plantilla muestra una lista de todos los pedidos realizados por el usuario. Muestra información resumida sobre cada pedido, como la fecha, el estado
+   y el precio total.
+- **product_detail.html.twig**: Esta plantilla muestra los detalles de un producto específico, incluyendo su nombre, descripción, precio y opciones de compra. También puede
+  incluir imágenes adicionales y comentarios de los clientes.
+- **profile.html.twig**: Esta plantilla muestra el perfil del usuario, incluyendo información personal como nombre, correo electrónico, dirección, etc. También puede
+  proporcionar opciones para que el usuario actualice su información.
+- **search.html.twig**: Esta plantilla muestra los resultados de una búsqueda de productos realizada por el usuario. Muestra una lista de productos que coinciden con los
+  criterios de búsqueda especificados.
+- **simpleText.html.twig**: Esta plantilla muestra un texto simple en la página. Dependiendo del valor obtenido desde el controlador, muestra en pantalla un texto u otro.
+
+
