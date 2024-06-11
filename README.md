@@ -181,4 +181,52 @@ búsqueda y seleccionar etiquetas asociadas a los productos.
   criterios de búsqueda especificados.
 - **simpleText.html.twig**: Esta plantilla muestra un texto simple en la página. Dependiendo del valor obtenido desde el controlador, muestra en pantalla un texto u otro.
 
+## JS
+
+### `search_filter.js`
+
+Este script implementa una función denominada `toggleFilters()` que permite controlar la visibilidad de los filtros de búsqueda en una aplicación web. Al llamar a esta 
+función, se verifica si el contenedor de los filtros está actualmente visible o no. Si el contenedor está visible, se oculta, eliminando cualquier altura mínima establecida.
+Por otro lado, si el contenedor está oculto, se establece una altura mínima para el contenedor igual a la altura total de los filtros, lo que resulta en la visualización completa de los mismos.
+
+Este script aprovecha el modelo de objetos del documento (DOM) de JavaScript para acceder al elemento del contenedor de los filtros mediante su identificador único. Luego,
+ajusta dinámicamente la altura mínima del contenedor para mostrar u ocultar los filtros según sea necesario.
+
+### `modifyQuantityCart.js`
+
+Este script se encarga de manejar las operaciones relacionadas con la gestión del carrito de compras en una aplicación web, tales como la actualización y eliminación de productos.
+Al cargar completamente el contenido del documento HTML, este script define dos funciones asincrónicas: `updateQuantity()` y `removeFromCart()`.
+
+La función `updateQuantity()` se utiliza para enviar una solicitud al servidor con el propósito de actualizar la cantidad de un producto específico en el carrito de compras.
+Utiliza la API `fetch()` para realizar solicitudes HTTP asincrónicas al servidor, enviando los datos necesarios en formato JSON.
+
+Por otro lado, la función `removeFromCart()` se encarga de eliminar un producto del carrito de compras. Similar a `updateQuantity()`, utiliza la API `fetch()` para enviar una 
+solicitud al servidor, esta vez para eliminar el producto seleccionado del carrito.
+
+Ambas funciones utilizan manipulaciones del DOM para actualizar dinámicamente la interfaz de usuario en respuesta a las acciones del usuario, como aumentar o disminuir la cantidad de 
+productos, o eliminar productos del carrito. Esto permite una experiencia de usuario fluida y sin interrupciones durante la gestión del carrito de compras en la aplicación web.
+
+## Medidas de seguridad
+
+### `config/packages/security.yaml`
+
+Este archivo de configuración de seguridad describe las medidas de seguridad implementadas en una aplicación Symfony. Se centra en la autenticación de usuarios, el control de
+acceso y otras consideraciones de seguridad relevantes.
+
+- `password_hashers`: Define cómo se deben almacenar y verificar las contraseñas de los usuarios. En este caso, se utiliza el autenticador de contraseñas proporcionado por Symfony
+  para las interfaces de usuario autenticadas por contraseña. Se utiliza el algoritmo de hash automático para seleccionar el mejor método disponible según la plataforma.
+
+- `providers`: Especifica los proveedores de usuarios, que son responsables de cargar usuarios desde diferentes fuentes. En este caso, se utiliza un proveedor de entidad para
+  cargar usuarios desde la base de datos.
+
+- `firewalls`: Define las reglas de seguridad que se aplican a las diferentes partes de la aplicación. Se configuran dos firewalls: "dev" para el entorno de desarrollo, donde la
+  seguridad está desactivada para las rutas internas, y "main" para el entorno de producción, donde se implementa la autenticación de usuarios mediante un autenticador personalizado
+  y se gestiona el cierre de sesión.
+
+- `remember_me`: Configura la funcionalidad de "recordar usuario" para mantener la sesión del usuario incluso después de cerrar el navegador. Se utiliza un secreto para firmar
+   los datos de autenticación y se especifica la duración de la sesión.
+
+- `access_control`: Define las reglas de control de acceso que determinan qué roles de usuario pueden acceder a qué rutas. En este caso, se restringe el acceso a la ruta "/shop"
+  solo a los usuarios con el rol ROLE_USER.
+
 
