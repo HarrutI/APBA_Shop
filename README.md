@@ -1,232 +1,179 @@
 # APBA SHOP
 
+The project consists of developing an exclusive online store for the employees of the Port Authority of the Bay of Algeciras. The platform will offer merchandise and security items with the entity's logo at reduced prices. This online store aims to provide a diverse and appealing range of products for the workers, offering them the opportunity to acquire high-quality products in a convenient and accessible manner. The project includes the design and development of the web platform, the acquisition of initial inventory, the implementation of internal marketing strategies, and the training of the personnel responsible for managing the online store.
 
-El proyecto consiste en el desarrollo de una tienda online exclusiva para los empleados de la Autoridad Portuaria de la Bahía de Algeciras. 
-La plataforma ofrecerá productos de merchandising y elementos de seguridad con el logotipo de la entidad a precios reducidos. 
-Esta tienda online busca proporcionar una oferta diversificada y atractiva para los trabajadores, brindándoles la oportunidad de adquirir 
-productos de alta calidad de una manera conveniente y accesible. El proyecto incluye el diseño y desarrollo de la plataforma web, la adquisición de 
-inventario inicial, la implementación de estrategias de marketing internas y la capacitación del personal encargado de gestionar la tienda online.
-
-## Requisitos del Sistema
+## System Requirements
 
 - PHP >= Last version
 - Composer
 - Symfony CLI
 
-## Instalación
+## Installation
 
-1. Clona este repositorio en tu máquina local:
+1. Clone this repository to your local machine:
 
     ```bash
     git clone https://github.com/HarrutI/APBA_Shop.git
     ```
 
-2. Instala las dependencias del proyecto utilizando Composer:
+2. Install project dependencies using Composer:
 
     ```bash
     composer install
     ```
 
-3. Configura tu base de datos en el archivo `.env`:
+3. Configure your database in the `.env` file:
 
     ```
-    DATABASE_URL=mysql://usuario:contraseña@host:puerto/nombre_base_de_datos
+    DATABASE_URL=mysql://username:password@host:port/database_name
     ```
 
-4. Crea la base de datos y ejecuta las migraciones:
+4. Create the database and execute migrations:
 
     ```bash
     php bin/console doctrine:database:create
     php bin/console doctrine:migrations:migrate
     ```
 
-## Uso
+## Usage
 
-Ejecuta el servidor local de Symfony:
+Run Symfony's local server:
 
 ```bash
 symfony server:start
 ```
 
-## Entidades
+## Entities
 
 ### BagProducts.php
-Esta entidad representa la relación entre Bolsas y Productos. Cada registro en esta tabla relaciona cada producto que tiene un carrito. 
-Sus variables son:
+This entity represents the relationship between Bags and Products. Each record in this table relates each product in a cart. Its variables are:
 
 ### Bags.php
-Representa los carritos almacenados en el sistema y a qué usuario pertenecen.
+Represents the carts stored in the system and to which user they belong.
 
 ### BillingDetails.php
-Representa los detalles de facturación asociados a un pedido Order. Puede incluir información como la dirección de facturación, nombre, etc.
+Represents the billing details associated with an Order. It can include information such as billing address, name, etc.
 
 ### Materials.php
-Almacena información extra de un producto y las cantidades que hay en almacén.
+Stores extra information about a product and the quantities in stock.
 
 ### OrderProducts.php
-Esta entidad representa la relación entre órdenes y productos. Cada registro en esta tabla relaciona un producto con una orden específica.
+This entity represents the relationship between orders and products. Each record in this table relates a product to a specific order.
 
 ### Orders.php
-La entidad Orders representa las órdenes realizadas por los usuarios. Contiene información sobre cada orden, como el usuario que realizó
-la orden, la fecha de la orden, etc.
+The Orders entity represents the orders placed by users. It contains information about each order, such as the user who placed the order, the order date, etc.
 
 ### Products.php
-Representa los productos disponibles en la tienda. Contiene información detallada sobre cada producto, como nombre, descripción, precio, etc.
+Represents the products available in the store. It contains detailed information about each product, such as name, description, price, etc.
 
 ### Tags.php
-La entidad Tags almacena etiquetas que se pueden asociar con productos para facilitar la búsqueda y organización.
+The Tags entity stores tags that can be associated with products to facilitate searching and organization.
 
 ### Users.php
-Representa los usuarios registrados en el sistema. Contiene información sobre cada usuario, como nombre, correo electrónico, contraseña, etc.
+Represents the users registered in the system. It contains information about each user, such as name, email, password, etc.
 
-## Controladores y Rutas
+
+## Controllers and Routes
 
 ### LoginController.php
-- **app_login**: Esta ruta se encarga de renderizar el formulario de inicio de sesión. Utiliza el servicio AuthenticationUtils para obtener
-  cualquier error que haya ocurrido durante el intento de inicio de sesión y para recuperar el último nombre de usuario ingresado por el usuario.
-  Estos datos se pasan a la plantilla login.html.twig para mostrar el formulario de inicio de sesión con la información adecuada (como mensajes
-  de error o el último nombre de usuario intentado).
-- **app_logout**: Gestiona la acción de cierre de sesión del usuario. Este método no contiene lógica, ya que el proceso de cierre de sesión es
-  manejado automáticamente por Symfony. La ruta simplemente define el punto donde se intercepta la solicitud de cierre de sesión y se procesa la
-  acción correspondiente, terminando la sesión del usuario actual.
+- **app_login**: This route is responsible for rendering the login form. It uses the AuthenticationUtils service to retrieve any errors that occurred during the login attempt and to retrieve the last username entered by the user. This data is passed to the login.html.twig template to display the login form with appropriate information (such as error messages or the last attempted username).
+- **app_logout**: Handles the user logout action. This method contains no logic, as the logout process is handled automatically by Symfony. The route simply defines the point where the logout request is intercepted and the corresponding action is processed, ending the session of the current user.
 
 ### ShopController.php
-- **app_shop_home**: Muestra los productos más populares. Consulta la base de datos para obtener los productos etiquetados como "Más Populares".
-   Estos productos se envían a la plantilla home.html.twig, donde se renderizan y se presentan al usuario en la página de inicio de la tienda.
-- **app_shop_search**: Permite buscar productos. Renderiza un formulario de búsqueda y procesa las consultas de búsqueda de los usuarios.
-  Utiliza los datos del formulario para buscar productos que coincidan con el nombre y las etiquetas especificadas. Los resultados de la búsqueda
-  se envían a la plantilla search.html.twig para su visualización.
-- **app_shop_contact**: Muestra la página de contacto. Renderiza la plantilla contact.html.twig, proporcionando al usuario información de contacto
-   y posiblemente un formulario de contacto.
-- **app_shop_pricacy-policy**: Muestra las políticas de privacidad. Renderiza la plantilla simpleText.html.twig con el texto correspondiente a las
-   políticas de privacidad de la tienda.
-- **app_shop_cookies-policy**: Muestra las políticas de cookies. Renderiza la plantilla simpleText.html.twig con el texto correspondiente a las
-  políticas de cookies de la tienda.
-- **app_shop_legal_advice**: Muestra el aviso legal. Renderiza la plantilla simpleText.html.twig con el texto correspondiente al aviso legal de la tienda.
-- **app_shop_profile**: Muestra el perfil del usuario. Renderiza la plantilla profile.html.twig, proporcionando al usuario información sobre su cuenta,
-   como su nombre, correo electrónico y otra información personal.
-- **app_shop_cart**: Muestra el carrito de compras del usuario. Consulta la base de datos para obtener el carrito de compras del usuario actual, incluyendo
-   los productos añadidos y sus cantidades. Calcula el precio total de los productos en el carrito y renderiza esta información en la plantilla cart.html.twig.
-- **app_shop_product_detail**: Muestra los detalles de un producto específico. Consulta la base de datos para obtener la información detallada de un producto
-   específico, incluyendo su nombre, descripción, precio y materiales. Esta información se envía a la plantilla product_detail.html.twig para su visualización.
-- **app_shop_checkout**: Gestiona el proceso de pago. Renderiza un formulario de detalles de facturación, que el usuario debe completar para proceder con el
-  pago. Procesa los detalles de facturación y crea un nuevo pedido en la base de datos, moviendo los productos del carrito al pedido y ajustando las
-  cantidades de stock de los productos. Finalmente, redirige al usuario a la página de detalles del pedido.
-- **app_shop_order_details**: Muestra los detalles de un pedido específico. Consulta la base de datos para obtener la información de un pedido específico,
-   incluyendo los productos pedidos, sus cantidades y detalles de facturación. Esta información se envía a la plantilla orderDetails.html.twig para su visualización.
+- **app_shop_home**: Displays the most popular products. Queries the database to retrieve products labeled as "Most Popular". These products are sent to the home.html.twig template, where they are rendered and presented to the user on the store's homepage.
+- **app_shop_search**: Allows searching for products. Renders a search form and processes user search queries. It uses the form data to search for products matching the specified name and tags. The search results are sent to the search.html.twig template for display.
+- **app_shop_contact**: Displays the contact page. Renders the contact.html.twig template, providing the user with contact information and possibly a contact form.
+- **app_shop_privacy-policy**: Displays the privacy policies. Renders the simpleText.html.twig template with the corresponding text for the store's privacy policies.
+- **app_shop_cookies-policy**: Displays the cookies policies. Renders the simpleText.html.twig template with the corresponding text for the store's cookies policies.
+- **app_shop_legal_advice**: Displays the legal notice. Renders the simpleText.html.twig template with the corresponding text for the store's legal notice.
+- **app_shop_profile**: Displays the user profile. Renders the profile.html.twig template, providing the user with information about their account, such as their name, email, and other personal information.
+- **app_shop_cart**: Displays the user's shopping cart. Queries the database to retrieve the current user's shopping cart, including the added products and their quantities. It calculates the total price of the products in the cart and renders this information in the cart.html.twig template.
+- **app_shop_product_detail**: Displays the details of a specific product. Queries the database to retrieve detailed information about a specific product, including its name, description, price, and materials. This information is sent to the product_detail.html.twig template for display.
+- **app_shop_checkout**: Manages the checkout process. Renders a billing details form, which the user must complete to proceed with payment. It processes the billing details and creates a new order in the database, moving the products from the cart to the order and adjusting the stock quantities of the products. Finally, it redirects the user to the order details page.
+- **app_shop_order_details**: Displays the details of a specific order. Queries the database to retrieve information about a specific order, including the ordered products, their quantities, and billing details. This information is sent to the orderDetails.html.twig template for display.
 
-### Rutas POST
-- **remove_from_cart**: Esta ruta permite al usuario eliminar un producto específico de su carrito de compras. Recibe el ID del carrito y el ID del producto
-   como parámetros. Una vez recibida la solicitud, el controlador elimina el producto correspondiente del carrito y actualiza la base de datos para reflejar el
-   cambio. Después, redirige al usuario de vuelta al carrito para mostrar el estado actualizado.
-- **update_quantity**: Esta ruta permite al usuario actualizar la cantidad de un producto específico en su carrito de compras. Recibe el ID del carrito y el ID
-  del producto como parámetros, así como la nueva cantidad deseada a través del cuerpo de la solicitud. El controlador valida y aplica la actualización en la base
-  de datos y redirige al usuario de vuelta al carrito para mostrar el estado actualizado del mismo.
+### POST Routes
+- **remove_from_cart**: This route allows the user to remove a specific product from their shopping cart. It receives the cart ID and the product ID as parameters. Once the request is received, the controller removes the corresponding product from the cart and updates the database to reflect the change. Then, it redirects the user back to the cart to show the updated status.
+- **update_quantity**: This route allows the user to update the quantity of a specific product in their shopping cart. It receives the cart ID and the product ID as parameters, as well as the new desired quantity via the request body. The controller validates and applies the update in the database and redirects the user back to the cart to show its updated status.
 
-## Formularios
+
+## Forms
 
 ### BillingType
-La clase BillingType es responsable de construir el formulario para la entidad BillingDetails, que contiene los detalles de facturación de un pedido. Este formulario
-incluye varios campos que son esenciales para recopilar información de facturación del usuario.
+The BillingType class is responsible for constructing the form for the BillingDetails entity, which contains the billing details of an order. This form includes several fields that are essential for collecting user billing information.
 
-- **buildForm**: Este método construye el formulario agregando diferentes campos, cada uno representando un aspecto de los detalles de facturación.
-  - name: Un campo de texto para ingresar el nombre del usuario.
-  - surname: Un campo de texto para ingresar el apellido del usuario.
-  - phone_number: Un campo de texto para ingresar el número de teléfono del usuario.
-  - email: Un campo de tipo email para ingresar la dirección de correo electrónico del usuario.
-  - addressLine1: Un campo de texto para ingresar la primera línea de la dirección del usuario.
-  - addressLine2: Un campo de texto opcional para ingresar la segunda línea de la dirección del usuario.
-  - city: Un campo de texto para ingresar la ciudad del usuario.
-  - state: Un campo de texto para ingresar el estado o provincia del usuario.
-  - postalCode: Un campo de texto para ingresar el código postal del usuario.
-  - country: Un campo de texto para ingresar el país del usuario.
-- **configureOptions**: Este método configura las opciones del formulario, especificando que los datos manejados por el formulario corresponden a la clase BillingDetails.
+- **buildForm**: This method constructs the form by adding different fields, each representing an aspect of the billing details.
+  - name: A text field for entering the user's name.
+  - surname: A text field for entering the user's surname.
+  - phone_number: A text field for entering the user's phone number.
+  - email: An email type field for entering the user's email address.
+  - addressLine1: A text field for entering the first line of the user's address.
+  - addressLine2: An optional text field for entering the second line of the user's address.
+  - city: A text field for entering the user's city.
+  - state: A text field for entering the user's state or province.
+  - postalCode: A text field for entering the user's postal code.
+  - country: A text field for entering the user's country.
+- **configureOptions**: This method configures the form options, specifying that the data handled by the form corresponds to the BillingDetails class.
 
 ### SearchProductType
-La clase SearchProductType es responsable de construir el formulario utilizado para buscar productos. Este formulario permite a los usuarios ingresar criterios de 
-búsqueda y seleccionar etiquetas asociadas a los productos.
+The SearchProductType class is responsible for constructing the form used for searching products. This form allows users to enter search criteria and select tags associated with the products.
 
-- **buildForm**: Este método construye el formulario agregando diferentes campos, cada uno representando un criterio de búsqueda.
-  - query: Un campo de tipo búsqueda que permite a los usuarios ingresar términos de búsqueda. Tiene una etiqueta personalizada "Buscar productos" y no es obligatorio.
-  - tags: Un campo de tipo entidad que permite seleccionar múltiples etiquetas asociadas a los productos. Este campo se relaciona con la entidad Tags, utilizando el campo
-    name de la entidad como etiqueta para cada opción. Las opciones se presentan como una lista de casillas de verificación y el campo no es obligatorio.
-- **configureOptions**: Este método configura las opciones del formulario, especificando que el método de envío del formulario es GET.
+- **buildForm**: This method constructs the form by adding different fields, each representing a search criterion.
+  - query: A search type field that allows users to enter search terms. It has a custom label "Search products" and is not required.
+  - tags: An entity type field that allows selecting multiple tags associated with products. This field is related to the Tags entity, using the entity's name field as a label for each option. Options are presented as a list of checkboxes and the field is not required.
+- **configureOptions**: This method configures the form options, specifying that the form's submission method is GET.
+
 
 ## Templates
 
-### Carpeta Security
-- **login.html.twig**: Esta plantilla se utiliza para mostrar el formulario de inicio de sesión. Contiene campos para ingresar el correo electrónico y la contraseña, así
- como una opción para recordar el correo electrónico y un botón para enviar el formulario.
+### Security Folder
+- **login.html.twig**: This template is used to display the login form. It contains fields for entering email and password, as well as an option to remember the email and a button to submit the form.
 
-### Carpeta Shop
-- **cart.html.twig**: Esta plantilla muestra los productos que el usuario ha agregado al carrito de compras. Muestra una tabla con detalles de cada producto, incluyendo
-  imagen, nombre, precio, cantidad y subtotal. También muestra el total de la compra y proporciona un botón para proceder al pago.
-- **checkout.html.twig**: Esta plantilla se utiliza para el proceso de pago. Muestra un resumen del precio total de la compra y un formulario para que el usuario ingrese
-   su información de facturación, como nombre, apellido, número de teléfono, dirección, etc.
-- **contact.html.twig**: Esta plantilla muestra un formulario de contacto donde los usuarios pueden enviar preguntas o comentarios. Contiene campos para ingresar el nombre,
-   correo electrónico y mensaje del usuario, así como un botón para enviar el formulario.
-- **home.html.twig**: Esta plantilla representa la página de inicio de la tienda. Muestra una selección de productos destacados y proporciona enlaces para que los usuarios
-  naveguen por diferentes categorías de productos.
-- **index.html.twig**: Esta plantilla es la estructura base de todas las páginas del sitio. Define la estructura básica del HTML, incluyendo la cabecera, el contenido principal
-  y el pie de página. También carga los estilos CSS y otros recursos necesarios.
-- **order_details.html.twig**: Esta plantilla muestra los detalles de un pedido específico. Muestra información detallada sobre los productos incluidos en el pedido, así como
-   el precio total y la información de envío.
-- **orders.html.twig**: Esta plantilla muestra una lista de todos los pedidos realizados por el usuario. Muestra información resumida sobre cada pedido, como la fecha, el estado
-   y el precio total.
-- **product_detail.html.twig**: Esta plantilla muestra los detalles de un producto específico, incluyendo su nombre, descripción, precio y opciones de compra. También puede
-  incluir imágenes adicionales y comentarios de los clientes.
-- **profile.html.twig**: Esta plantilla muestra el perfil del usuario, incluyendo información personal como nombre, correo electrónico, dirección, etc. También puede
-  proporcionar opciones para que el usuario actualice su información.
-- **search.html.twig**: Esta plantilla muestra los resultados de una búsqueda de productos realizada por el usuario. Muestra una lista de productos que coinciden con los
-  criterios de búsqueda especificados.
-- **simpleText.html.twig**: Esta plantilla muestra un texto simple en la página. Dependiendo del valor obtenido desde el controlador, muestra en pantalla un texto u otro.
+### Shop Folder
+- **cart.html.twig**: This template displays the products that the user has added to the shopping cart. It shows a table with details of each product, including image, name, price, quantity, and subtotal. It also shows the total purchase amount and provides a button to proceed to checkout.
+- **checkout.html.twig**: This template is used for the checkout process. It displays a summary of the total purchase price and a form for the user to enter their billing information, such as name, surname, phone number, address, etc.
+- **contact.html.twig**: This template displays a contact form where users can submit questions or comments. It contains fields for entering the user's name, email, and message, as well as a button to submit the form.
+- **home.html.twig**: This template represents the store's homepage. It displays a selection of featured products and provides links for users to browse different product categories.
+- **index.html.twig**: This template is the base structure for all site pages. It defines the basic HTML structure, including the header, main content, and footer. It also loads CSS styles and other necessary resources.
+- **order_details.html.twig**: This template displays the details of a specific order. It shows detailed information about the products included in the order, as well as the total price and shipping information.
+- **orders.html.twig**: This template displays a list of all orders placed by the user. It shows summary information about each order, such as date, status, and total price.
+- **product_detail.html.twig**: This template displays the details of a specific product, including its name, description, price, and purchasing options. It may also include additional images and customer reviews.
+- **profile.html.twig**: This template displays the user's profile, including personal information such as name, email, address, etc. It may also provide options for the user to update their information.
+- **search.html.twig**: This template displays the results of a product search performed by the user. It shows a list of products that match the specified search criteria.
+- **simpleText.html.twig**: This template displays simple text on the page. Depending on the value obtained from the controller, it displays one text or another on the screen.
 
-## JS
+
+## JavaScript
 
 ### `search_filter.js`
 
-Este script implementa una función denominada `toggleFilters()` que permite controlar la visibilidad de los filtros de búsqueda en una aplicación web. Al llamar a esta 
-función, se verifica si el contenedor de los filtros está actualmente visible o no. Si el contenedor está visible, se oculta, eliminando cualquier altura mínima establecida.
-Por otro lado, si el contenedor está oculto, se establece una altura mínima para el contenedor igual a la altura total de los filtros, lo que resulta en la visualización completa de los mismos.
+This script implements a function called `toggleFilters()` that controls the visibility of search filters in a web application. When calling this function, it checks if the filters container is currently visible or not. If the container is visible, it hides it by removing any set minimum height. On the other hand, if the container is hidden, it sets a minimum height for the container equal to the total height of the filters, resulting in the complete display of the filters.
 
-Este script aprovecha el modelo de objetos del documento (DOM) de JavaScript para acceder al elemento del contenedor de los filtros mediante su identificador único. Luego,
-ajusta dinámicamente la altura mínima del contenedor para mostrar u ocultar los filtros según sea necesario.
+This script leverages JavaScript's Document Object Model (DOM) to access the filters container element by its unique identifier. It then dynamically adjusts the minimum height of the container to show or hide the filters as needed.
 
 ### `modifyQuantityCart.js`
 
-Este script se encarga de manejar las operaciones relacionadas con la gestión del carrito de compras en una aplicación web, tales como la actualización y eliminación de productos.
-Al cargar completamente el contenido del documento HTML, este script define dos funciones asincrónicas: `updateQuantity()` y `removeFromCart()`.
+This script handles operations related to managing the shopping cart in a web application, such as updating and removing products. Upon fully loading the HTML document content, this script defines two asynchronous functions: `updateQuantity()` and `removeFromCart()`.
 
-La función `updateQuantity()` se utiliza para enviar una solicitud al servidor con el propósito de actualizar la cantidad de un producto específico en el carrito de compras.
-Utiliza la API `fetch()` para realizar solicitudes HTTP asincrónicas al servidor, enviando los datos necesarios en formato JSON.
+The `updateQuantity()` function is used to send a request to the server to update the quantity of a specific product in the shopping cart. It uses the `fetch()` API to make asynchronous HTTP requests to the server, sending the necessary data in JSON format.
 
-Por otro lado, la función `removeFromCart()` se encarga de eliminar un producto del carrito de compras. Similar a `updateQuantity()`, utiliza la API `fetch()` para enviar una 
-solicitud al servidor, esta vez para eliminar el producto seleccionado del carrito.
+On the other hand, the `removeFromCart()` function is responsible for removing a product from the shopping cart. Similar to `updateQuantity()`, it uses the `fetch()` API to send a request to the server, this time to remove the selected product from the cart.
 
-Ambas funciones utilizan manipulaciones del DOM para actualizar dinámicamente la interfaz de usuario en respuesta a las acciones del usuario, como aumentar o disminuir la cantidad de 
-productos, o eliminar productos del carrito. Esto permite una experiencia de usuario fluida y sin interrupciones durante la gestión del carrito de compras en la aplicación web.
+Both functions use DOM manipulations to dynamically update the user interface in response to user actions, such as increasing or decreasing the quantity of products, or removing products from the cart. This allows for a smooth and uninterrupted user experience during shopping cart management in the web application.
 
-## Medidas de seguridad
+
+## Security Measures
 
 ### `config/packages/security.yaml`
 
-Este archivo de configuración de seguridad describe las medidas de seguridad implementadas en una aplicación Symfony. Se centra en la autenticación de usuarios, el control de
-acceso y otras consideraciones de seguridad relevantes.
+This security configuration file describes the security measures implemented in a Symfony application. It focuses on user authentication, access control, and other relevant security considerations.
 
-- `password_hashers`: Define cómo se deben almacenar y verificar las contraseñas de los usuarios. En este caso, se utiliza el autenticador de contraseñas proporcionado por Symfony
-  para las interfaces de usuario autenticadas por contraseña. Se utiliza el algoritmo de hash automático para seleccionar el mejor método disponible según la plataforma.
+- `password_hashers`: Defines how user passwords should be stored and verified. In this case, the password hasher provided by Symfony is used for password-authenticated user interfaces. Automatic hash algorithm is used to select the best available method depending on the platform.
 
-- `providers`: Especifica los proveedores de usuarios, que son responsables de cargar usuarios desde diferentes fuentes. En este caso, se utiliza un proveedor de entidad para
-  cargar usuarios desde la base de datos.
+- `providers`: Specifies user providers, which are responsible for loading users from different sources. In this case, an entity provider is used to load users from the database.
 
-- `firewalls`: Define las reglas de seguridad que se aplican a las diferentes partes de la aplicación. Se configuran dos firewalls: "dev" para el entorno de desarrollo, donde la
-  seguridad está desactivada para las rutas internas, y "main" para el entorno de producción, donde se implementa la autenticación de usuarios mediante un autenticador personalizado
-  y se gestiona el cierre de sesión.
+- `firewalls`: Defines the security rules that apply to different parts of the application. Two firewalls are configured: "dev" for the development environment, where security is disabled for internal routes, and "main" for the production environment, where user authentication is implemented using a custom authenticator and logout is managed.
 
-- `remember_me`: Configura la funcionalidad de "recordar usuario" para mantener la sesión del usuario incluso después de cerrar el navegador. Se utiliza un secreto para firmar
-   los datos de autenticación y se especifica la duración de la sesión.
+- `remember_me`: Configures the "remember user" functionality to keep the user session even after closing the browser. A secret is used to sign the authentication data, and the session duration is specified.
 
-- `access_control`: Define las reglas de control de acceso que determinan qué roles de usuario pueden acceder a qué rutas. En este caso, se restringe el acceso a la ruta "/shop"
-  solo a los usuarios con el rol ROLE_USER.
-
-
+- `access_control`: Defines access control rules that determine which user roles can access which routes. In this case, access to the "/shop" route is restricted only to users with the ROLE_USER role.
