@@ -76,25 +76,25 @@ Represents the users registered in the system. It contains information about eac
 ## Controllers and Routes
 
 ### LoginController.php
-- **app_login**: This route is responsible for rendering the login form. It uses the AuthenticationUtils service to retrieve any errors that occurred during the login attempt and to retrieve the last username entered by the user. This data is passed to the login.html.twig template to display the login form with appropriate information (such as error messages or the last attempted username).
-- **app_logout**: Handles the user logout action. This method contains no logic, as the logout process is handled automatically by Symfony. The route simply defines the point where the logout request is intercepted and the corresponding action is processed, ending the session of the current user.
+- `app_login`: This route is responsible for rendering the login form. It uses the AuthenticationUtils service to retrieve any errors that occurred during the login attempt and to retrieve the last username entered by the user. This data is passed to the login.html.twig template to display the login form with appropriate information (such as error messages or the last attempted username).
+- `app_logout`: Handles the user logout action. This method contains no logic, as the logout process is handled automatically by Symfony. The route simply defines the point where the logout request is intercepted and the corresponding action is processed, ending the session of the current user.
 
 ### ShopController.php
-- **app_shop_home**: Displays the most popular products. Queries the database to retrieve products labeled as "Most Popular". These products are sent to the home.html.twig template, where they are rendered and presented to the user on the store's homepage.
-- **app_shop_search**: Allows searching for products. Renders a search form and processes user search queries. It uses the form data to search for products matching the specified name and tags. The search results are sent to the search.html.twig template for display.
-- **app_shop_contact**: Displays the contact page. Renders the contact.html.twig template, providing the user with contact information and possibly a contact form.
-- **app_shop_privacy-policy**: Displays the privacy policies. Renders the simpleText.html.twig template with the corresponding text for the store's privacy policies.
-- **app_shop_cookies-policy**: Displays the cookies policies. Renders the simpleText.html.twig template with the corresponding text for the store's cookies policies.
-- **app_shop_legal_advice**: Displays the legal notice. Renders the simpleText.html.twig template with the corresponding text for the store's legal notice.
-- **app_shop_profile**: Displays the user profile. Renders the profile.html.twig template, providing the user with information about their account, such as their name, email, and other personal information.
-- **app_shop_cart**: Displays the user's shopping cart. Queries the database to retrieve the current user's shopping cart, including the added products and their quantities. It calculates the total price of the products in the cart and renders this information in the cart.html.twig template.
-- **app_shop_product_detail**: Displays the details of a specific product. Queries the database to retrieve detailed information about a specific product, including its name, description, price, and materials. This information is sent to the product_detail.html.twig template for display.
-- **app_shop_checkout**: Manages the checkout process. Renders a billing details form, which the user must complete to proceed with payment. It processes the billing details and creates a new order in the database, moving the products from the cart to the order and adjusting the stock quantities of the products. Finally, it redirects the user to the order details page.
-- **app_shop_order_details**: Displays the details of a specific order. Queries the database to retrieve information about a specific order, including the ordered products, their quantities, and billing details. This information is sent to the orderDetails.html.twig template for display.
+- `app_shop_home`: Displays the most popular products. Queries the database to retrieve products labeled as "Most Popular". These products are sent to the home.html.twig template, where they are rendered and presented to the user on the store's homepage.
+- `app_shop_search`: Allows searching for products. Renders a search form and processes user search queries. It uses the form data to search for products matching the specified name and tags. The search results are sent to the search.html.twig template for display.
+- `app_shop_contact`: Displays the contact page. Renders the contact.html.twig template, providing the user with contact information and possibly a contact form.
+- `app_shop_privacy-policy`: Displays the privacy policies. Renders the simpleText.html.twig template with the corresponding text for the store's privacy policies.
+- `app_shop_cookies-policy`: Displays the cookies policies. Renders the simpleText.html.twig template with the corresponding text for the store's cookies policies.
+- `app_shop_legal_advice`: Displays the legal notice. Renders the simpleText.html.twig template with the corresponding text for the store's legal notice.
+- `app_shop_profile`: Displays the user profile. Renders the profile.html.twig template, providing the user with information about their account, such as their name, email, and other personal information.
+- `app_shop_cart`: Displays the user's shopping cart. Queries the database to retrieve the current user's shopping cart, including the added products and their quantities. It calculates the total price of the products in the cart and renders this information in the cart.html.twig template.
+- `app_shop_product_detail`: Displays the details of a specific product. Queries the database to retrieve detailed information about a specific product, including its name, description, price, and materials. This information is sent to the product_detail.html.twig template for display.
+- `app_shop_checkout`: Manages the checkout process. Renders a billing details form, which the user must complete to proceed with payment. It processes the billing details and creates a new order in the database, moving the products from the cart to the order and adjusting the stock quantities of the products. Finally, it redirects the user to the order details page.
+- `app_shop_order_details`: Displays the details of a specific order. Queries the database to retrieve information about a specific order, including the ordered products, their quantities, and billing details. This information is sent to the orderDetails.html.twig template for display.
 
 ### POST Routes
-- **remove_from_cart**: This route allows the user to remove a specific product from their shopping cart. It receives the cart ID and the product ID as parameters. Once the request is received, the controller removes the corresponding product from the cart and updates the database to reflect the change. Then, it redirects the user back to the cart to show the updated status.
-- **update_quantity**: This route allows the user to update the quantity of a specific product in their shopping cart. It receives the cart ID and the product ID as parameters, as well as the new desired quantity via the request body. The controller validates and applies the update in the database and redirects the user back to the cart to show its updated status.
+- `remove_from_cart`: This route allows the user to remove a specific product from their shopping cart. It receives the cart ID and the product ID as parameters. Once the request is received, the controller removes the corresponding product from the cart and updates the database to reflect the change. Then, it redirects the user back to the cart to show the updated status.
+- `update_quantity`: This route allows the user to update the quantity of a specific product in their shopping cart. It receives the cart ID and the product ID as parameters, as well as the new desired quantity via the request body. The controller validates and applies the update in the database and redirects the user back to the cart to show its updated status.
 
 
 ## Forms
@@ -102,7 +102,7 @@ Represents the users registered in the system. It contains information about eac
 ### BillingType
 The BillingType class is responsible for constructing the form for the BillingDetails entity, which contains the billing details of an order. This form includes several fields that are essential for collecting user billing information.
 
-- **buildForm**: This method constructs the form by adding different fields, each representing an aspect of the billing details.
+- `buildForm`: This method constructs the form by adding different fields, each representing an aspect of the billing details.
   - name: A text field for entering the user's name.
   - surname: A text field for entering the user's surname.
   - phone_number: A text field for entering the user's phone number.
@@ -113,34 +113,34 @@ The BillingType class is responsible for constructing the form for the BillingDe
   - state: A text field for entering the user's state or province.
   - postalCode: A text field for entering the user's postal code.
   - country: A text field for entering the user's country.
-- **configureOptions**: This method configures the form options, specifying that the data handled by the form corresponds to the BillingDetails class.
+- `configureOptions`: This method configures the form options, specifying that the data handled by the form corresponds to the BillingDetails class.
 
 ### SearchProductType
 The SearchProductType class is responsible for constructing the form used for searching products. This form allows users to enter search criteria and select tags associated with the products.
 
-- **buildForm**: This method constructs the form by adding different fields, each representing a search criterion.
+- `buildForm`: This method constructs the form by adding different fields, each representing a search criterion.
   - query: A search type field that allows users to enter search terms. It has a custom label "Search products" and is not required.
   - tags: An entity type field that allows selecting multiple tags associated with products. This field is related to the Tags entity, using the entity's name field as a label for each option. Options are presented as a list of checkboxes and the field is not required.
-- **configureOptions**: This method configures the form options, specifying that the form's submission method is GET.
+- `configureOptions`: This method configures the form options, specifying that the form's submission method is GET.
 
 
 ## Templates
 
 ### Security Folder
-- **login.html.twig**: This template is used to display the login form. It contains fields for entering email and password, as well as an option to remember the email and a button to submit the form.
+- `login.html.twig`: This template is used to display the login form. It contains fields for entering email and password, as well as an option to remember the email and a button to submit the form.
 
 ### Shop Folder
-- **cart.html.twig**: This template displays the products that the user has added to the shopping cart. It shows a table with details of each product, including image, name, price, quantity, and subtotal. It also shows the total purchase amount and provides a button to proceed to checkout.
-- **checkout.html.twig**: This template is used for the checkout process. It displays a summary of the total purchase price and a form for the user to enter their billing information, such as name, surname, phone number, address, etc.
-- **contact.html.twig**: This template displays a contact form where users can submit questions or comments. It contains fields for entering the user's name, email, and message, as well as a button to submit the form.
-- **home.html.twig**: This template represents the store's homepage. It displays a selection of featured products and provides links for users to browse different product categories.
-- **index.html.twig**: This template is the base structure for all site pages. It defines the basic HTML structure, including the header, main content, and footer. It also loads CSS styles and other necessary resources.
-- **order_details.html.twig**: This template displays the details of a specific order. It shows detailed information about the products included in the order, as well as the total price and shipping information.
-- **orders.html.twig**: This template displays a list of all orders placed by the user. It shows summary information about each order, such as date, status, and total price.
-- **product_detail.html.twig**: This template displays the details of a specific product, including its name, description, price, and purchasing options. It may also include additional images and customer reviews.
-- **profile.html.twig**: This template displays the user's profile, including personal information such as name, email, address, etc. It may also provide options for the user to update their information.
-- **search.html.twig**: This template displays the results of a product search performed by the user. It shows a list of products that match the specified search criteria.
-- **simpleText.html.twig**: This template displays simple text on the page. Depending on the value obtained from the controller, it displays one text or another on the screen.
+- `cart.html.twig`: This template displays the products that the user has added to the shopping cart. It shows a table with details of each product, including image, name, price, quantity, and subtotal. It also shows the total purchase amount and provides a button to proceed to checkout.
+- `checkout.html.twig`: This template is used for the checkout process. It displays a summary of the total purchase price and a form for the user to enter their billing information, such as name, surname, phone number, address, etc.
+- `contact.html.twig`: This template displays a contact form where users can submit questions or comments. It contains fields for entering the user's name, email, and message, as well as a button to submit the form.
+- `home.html.twig`: This template represents the store's homepage. It displays a selection of featured products and provides links for users to browse different product categories.
+- `index.html.twig`: This template is the base structure for all site pages. It defines the basic HTML structure, including the header, main content, and footer. It also loads CSS styles and other necessary resources.
+- `order_details.html.twig`: This template displays the details of a specific order. It shows detailed information about the products included in the order, as well as the total price and shipping information.
+- `orders.html.twig`: This template displays a list of all orders placed by the user. It shows summary information about each order, such as date, status, and total price.
+- `product_detail.html.twig`: This template displays the details of a specific product, including its name, description, price, and purchasing options. It may also include additional images and customer reviews.
+- `profile.html.twig`: This template displays the user's profile, including personal information such as name, email, address, etc. It may also provide options for the user to update their information.
+- `search.html.twig`: This template displays the results of a product search performed by the user. It shows a list of products that match the specified search criteria.
+- `simpleText.html.twig`: This template displays simple text on the page. Depending on the value obtained from the controller, it displays one text or another on the screen.
 
 
 ## JavaScript
