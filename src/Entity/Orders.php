@@ -31,7 +31,7 @@ class Orders
     #[ORM\OneToMany(targetEntity: OrderProducts::class, mappedBy: 'order_id')]
     private Collection $orderProducts;
 
-    #[ORM\OneToOne(mappedBy: 'order_id', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: BillingDetails::class, mappedBy: 'order_id', cascade: ['persist', 'remove'])]
     private ?BillingDetails $billingDetails = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]

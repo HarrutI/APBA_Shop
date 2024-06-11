@@ -597,6 +597,4 @@ class ShopController extends AbstractController
             'orders' => $orderList
         ]);
     }
-
 }
-

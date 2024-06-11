@@ -42,7 +42,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 10)]
     private ?int $PhoneNumber = null;
 
-    #[ORM\OneToOne(mappedBy: 'user_id', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Bags::class, mappedBy: 'user_id', cascade: ['persist', 'remove'])]
     private ?Bags $bags = null;
 
     /**

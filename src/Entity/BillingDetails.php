@@ -43,7 +43,7 @@ class BillingDetails
     #[ORM\Column(length: 100)]
     private ?string $country = null;
 
-    #[ORM\OneToOne(inversedBy: 'billingDetails', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Orders::class, inversedBy: 'billingDetails', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Orders $order_id = null;
 

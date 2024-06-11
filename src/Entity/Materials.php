@@ -30,7 +30,7 @@ class Materials
     #[ORM\Column]
     private ?int $Quantity = null;
 
-    #[ORM\ManyToOne(inversedBy: 'materials')]
+    #[ORM\ManyToOne(targetEntity: Products::class, inversedBy: 'materials')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Products $product_id = null;
 
