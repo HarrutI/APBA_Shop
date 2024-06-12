@@ -75,6 +75,9 @@ Represents the users registered in the system. It contains information about eac
 
 ## Controllers and Routes
 
+### DefaultController.php: 
+- `app_homepage`: Manages navigation to the website's homepage. When accessing this route, it checks if the user has an active session. If the user has an active session, it redirects to the /shop/home page where the shop with the most popular products is displayed. If the user does not have an active session, it redirects to the /login page for the user to log in
+
 ### LoginController.php
 - `app_login`: This route is responsible for rendering the login form. It uses the AuthenticationUtils service to retrieve any errors that occurred during the login attempt and to retrieve the last username entered by the user. This data is passed to the login.html.twig template to display the login form with appropriate information (such as error messages or the last attempted username).
 - `app_logout`: Handles the user logout action. This method contains no logic, as the logout process is handled automatically by Symfony. The route simply defines the point where the logout request is intercepted and the corresponding action is processed, ending the session of the current user.
